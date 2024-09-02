@@ -1,0 +1,26 @@
+{
+  "name": "moshclubbackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "setup-dbs": "psql -f ./db/seed.sql",
+    "seed": "node ./db/seed/run-seed.js",
+    "vanilla-Sql": "psql -f ./db/data/planningSql.sql > ./db/data/planningSql.txt",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "pg": "^8.12.0",
+    "pg-format": "^1.0.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-extended": "^4.0.2",
+    "supertest": "^7.0.0"
+  }
+}
