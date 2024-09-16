@@ -1,6 +1,5 @@
 const format = require("pg-format");
 const db = require('../index');
-const {dropTables, createTables} = require("./index");
 
 const seed = ({reviewData, albumData, userData}) => {
     return db
@@ -24,6 +23,7 @@ const seed = ({reviewData, albumData, userData}) => {
             return db.query(
                 `CREATE TABLE albums (
                 album_id SERIAL PRIMARY KEY,
+                spotify_id VARCHAR NOT NULL,
                 album_name VARCHAR NOT NULL,
                 artist_name VARCHAR NOT NULL,
                 user_id INT,
@@ -63,8 +63,8 @@ const seed = ({reviewData, albumData, userData}) => {
     })
     .then(()=>{
         const insertAlbumDataQuery = format(
-            'INSERT INTO albums (album_name, artist_name, user_id) VALUES %L',
-            albumData.map(({album_name, artist_name, user_id})=>[album_name, artist_name, user_id])
+            'INSERT INTO albums (spotify_id, album_name, artist_name, user_id) VALUES %L',
+            albumData.map(({spotify_id ,album_name, artist_name, user_id})=>[spotify_id, album_name, artist_name, user_id])
         )
         return db.query(insertAlbumDataQuery);
     })
