@@ -1,4 +1,4 @@
-const { fetchAuthorisationToken } = require("../models/autorisationModels");
+const { fetchAuthorisationToken } = require("../models/spotifyModels");
 
 exports.getAuthorisationToken = (req,res, next)=>{
     fetchAuthorisationToken()

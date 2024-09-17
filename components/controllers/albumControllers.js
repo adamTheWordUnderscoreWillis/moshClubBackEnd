@@ -1,4 +1,9 @@
+const { fetchAlbumByID } = require("../models/albumModels");
+
 exports.getAlbumByID = (req,res)=>{
     const {spotify_id} = req.params;
-    res.status(200).send({msg: "It works"});
+    fetchAlbumByID(spotify_id)
+    .then(({responseBody})=>{
+        res.status(200).send(responseBody);
+    })
 }
