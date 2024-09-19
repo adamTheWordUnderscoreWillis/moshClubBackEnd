@@ -31,7 +31,7 @@ describe("Spotify WebAPI Testing", ()=>{
             return request(app).get("/api/albums/5zuQQIzkoyry8lZrmW4744")
             .expect(200);
         })
-        test.only("200 - Returns Album data", ()=>{
+        test("200 - Returns Album data", ()=>{
             const desiredAlbumData = {
                 total_tracks: 9,
                 external_urls: {
@@ -134,6 +134,65 @@ describe("Spotify WebAPI Testing", ()=>{
             .expect(200)
             .then(({body})=>{
                 expect(body).toEqual(desiredAlbumData)
+            })
+        })
+    })
+    describe("Get All Albums by ID",()=>{
+        test("200 - Returns Okay Status Code", ()=>{
+            return request(app).get("/api/albums")
+            .expect(200);
+        })
+        test.only("200 - Returns Data for mulitple albums", ()=>{
+            const desiredAlbumData = {
+                total_tracks: expect.any(Number),
+                external_urls: {
+                    spotify: expect.any(String),
+                    },
+                href: expect.any(String),
+                id: expect.any(String),
+                images: expect.anything(),
+                name: expect.any(String),
+                release_date: expect.any(String),
+                artists: expect.anything(),
+                tracks: {
+                    total: expect.any(Number),
+                    items: expect.anything()
+                }
+            }
+            return request(app).get("/api/albums").then(({body})=>{
+                
+                expect(body[0].name).toEqual("The Jaws Of Life")
+                expect(body[1].name).toEqual("Black Widow")
+                expect(body[2].name).toEqual("RETAS")
+                expect(body[3].name).toEqual("Dark Adrenaline")
+
+                for(let i = 0; i<body.length; i++){
+                    expect(body).toEqual([
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData,
+                        desiredAlbumData])
+                }
             })
         })
     })

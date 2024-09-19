@@ -19,9 +19,8 @@ exports.fetchAuthorisationToken = ()=> {
     .post("/api/token", options)
     .then(({data})=>{
         console.log(data.access_token)
-        fs.writeFile("./db/data/test-data/access_token.txt", data.access_token, "utf-8").then(()=>{
-            return data
-        })
+        fs.writeFile("./db/data/test-data/access_token.txt", data.access_token, "utf-8")
+        return data
     })
 }
 

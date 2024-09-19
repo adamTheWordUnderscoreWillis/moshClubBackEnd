@@ -3,8 +3,7 @@ const ENV = process.env.NODE_ENV || 'development';
 
 const envPath = `${__dirname}/../.env.${ENV}`;
 
-console.log(__dirname)
-console.log(envPath)
+console.log(`Connecting to the ${ENV} environment!`)
 
 require('dotenv').config({
   path: envPath,
