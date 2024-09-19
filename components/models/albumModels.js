@@ -27,29 +27,63 @@ exports.fetchAllAlbumsById = ()=>{
 
     const getIdsFromDatabase =  db.query(queryStatement)
     .then(({rows})=>{
-        const arrayOfIds = rows.map((album)=>{
-            return album.spotify_id
-        })
+        // const arrayOfIds = rows.map((album)=>{
+        //     return album.spotify_id
+        // })
 
-        return sliceSpotifyIds(arrayOfIds)
+        // return sliceSpotifyIds(arrayOfIds)
+        return rows
     })
 
     const getToken =  fs.readFile("./db/data/test-data/access_token.txt", "utf-8")
 
     return Promise.all([getIdsFromDatabase,getToken])
-    .then(([spotifyIds,accessToken])=>{
+    .then(([rows,accessToken])=>{
+
+        
         const spotifyUrl = axios.create({
             baseURL: "https://api.spotify.com",
             headers: {
                 "Authorization": "Bearer " + accessToken
             }
         })
+
+        const arrayOfIds = rows.map((album)=>{
+            return album.spotify_id
+        })
+        const spotifyIds = sliceSpotifyIds(arrayOfIds)
+        
         soptifyIdPromises = spotifyIds.map((IdString)=> spotifyUrl.get(`/v1/albums?ids=${IdString}`))
-        return Promise.all(soptifyIdPromises)
+        return Promise.all([rows, ...soptifyIdPromises])
     })
     .then((ResolvedAlbumPromises) =>{
-        const combinedAlbums = ResolvedAlbumPromises.map((albumBatch)=> albumBatch.data.albums).flat()
-        return combinedAlbums.map((album)=>formatAlbumData(album))
+        const combinedAlbums = ResolvedAlbumPromises.slice(1).map((albumBatch)=> albumBatch.data.albums).flat()
+        const spotifyAlbums = combinedAlbums.map((album)=>formatAlbumData(album))
+
+        ResolvedAlbumPromises[0].map((databaseAlbum)=>{
+            const albumIndex = spotifyAlbums.findIndex((spotifyAlbum)=> spotifyAlbum.id == databaseAlbum.spotify_id)
+            const arrayOfDatabaseKeys = ["album_id", "user_id", "review_count"]
+            const arrayOfScoringKeys = ["slap", "zest", "stick", "score"]
+
+            spotifyAlbums[albumIndex].scoring = {}
+            arrayOfDatabaseKeys.map((key)=> spotifyAlbums[albumIndex][key] = databaseAlbum[key])
+            arrayOfScoringKeys.map((key)=> spotifyAlbums[albumIndex].scoring[key] = databaseAlbum[key])
+        })
+        console.log(spotifyAlbums)
+        return spotifyAlbums
+
+        /* 
+        
+        We've got our album data formatted. We want to add some keys
+        Album_id
+        scoring
+        user-id
+        reviewer count
+        
+        
+        
+        
+        */
         
     })
     .catch((err)=>{

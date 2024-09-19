@@ -144,6 +144,10 @@ describe("Spotify WebAPI Testing", ()=>{
         })
         test.only("200 - Returns Data for mulitple albums", ()=>{
             const desiredAlbumData = {
+                album_id: expect.any(Number),
+                user_id: expect.any(Number),
+                review_count: expect.any(Number),
+                scoring: expect.anything(),
                 total_tracks: expect.any(Number),
                 external_urls: {
                     spotify: expect.any(String),
@@ -171,27 +175,8 @@ describe("Spotify WebAPI Testing", ()=>{
                         desiredAlbumData,
                         desiredAlbumData,
                         desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData])
+                        desiredAlbumData
+                    ])
                 }
             })
         })

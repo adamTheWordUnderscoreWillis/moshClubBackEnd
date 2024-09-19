@@ -68,8 +68,7 @@
 
 -- select * FROM albums;
 
-\c mosh_club
+\c mosh_club_test
 
-select * FROM reviews;
+
 select * FROM albums;
-select * FROM users;
