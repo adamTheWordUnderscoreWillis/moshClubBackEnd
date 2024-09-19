@@ -142,7 +142,7 @@ describe("Spotify WebAPI Testing", ()=>{
             return request(app).get("/api/albums")
             .expect(200);
         })
-        test.only("200 - Returns Data for mulitple albums", ()=>{
+        test("200 - Returns Data for mulitple albums", ()=>{
             const desiredAlbumData = {
                 album_id: expect.any(Number),
                 user_id: expect.any(Number),

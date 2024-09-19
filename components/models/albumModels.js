@@ -27,11 +27,6 @@ exports.fetchAllAlbumsById = ()=>{
 
     const getIdsFromDatabase =  db.query(queryStatement)
     .then(({rows})=>{
-        // const arrayOfIds = rows.map((album)=>{
-        //     return album.spotify_id
-        // })
-
-        // return sliceSpotifyIds(arrayOfIds)
         return rows
     })
 
@@ -69,21 +64,7 @@ exports.fetchAllAlbumsById = ()=>{
             arrayOfDatabaseKeys.map((key)=> spotifyAlbums[albumIndex][key] = databaseAlbum[key])
             arrayOfScoringKeys.map((key)=> spotifyAlbums[albumIndex].scoring[key] = databaseAlbum[key])
         })
-        console.log(spotifyAlbums)
         return spotifyAlbums
-
-        /* 
-        
-        We've got our album data formatted. We want to add some keys
-        Album_id
-        scoring
-        user-id
-        reviewer count
-        
-        
-        
-        
-        */
         
     })
     .catch((err)=>{
