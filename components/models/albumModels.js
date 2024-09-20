@@ -1,7 +1,7 @@
 const axios = require("axios")
 const fs = require("fs/promises")
 const db = require("../../db/index")
-const { sliceSpotifyIds } = require("../../db/utils/spotifyIdUtils")
+const { sliceSpotifyIds, formatsHtmlQuery } = require("../../db/utils/spotifyIdUtils")
 
 exports.fetchAlbumByID = (spotify_id)=>{
     return fs.readFile("./db/data/test-data/access_token.txt", "utf-8")
@@ -69,6 +69,38 @@ exports.fetchAllAlbumsById = ()=>{
     })
     .catch((err)=>{
         console.log({msg: err.message})
+    })
+}
+
+exports.fetchAlbumBySearch = (artist, album)=>{
+    return fs.readFile("./db/data/test-data/access_token.txt", "utf-8")
+    .then((accessToken)=>{
+
+        const spotifyUrl = axios.create({
+            baseURL: "https://api.spotify.com",
+            headers: {
+                "Authorization": "Bearer " + accessToken
+            }
+        })
+        
+        const formattedArtist = formatsHtmlQuery(artist)
+        const formattedAlbum = formatsHtmlQuery(album)
+        
+        return spotifyUrl.get(`/v1/search?q=${formattedAlbum}&artist=${formattedArtist}&type=album`)
+    })
+    .then(({data})=>{
+        const items = data.albums.items
+
+        return items.map((item)=>{
+            return {
+                id: item.id,
+                name: item.name,
+                artist: item.artists[0].name,
+                image: item.images[0].url
+            }
+        })
+        
+        
     })
 }
 

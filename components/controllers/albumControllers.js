@@ -1,4 +1,4 @@
-const { fetchAlbumByID, fetchAllAlbumsById } = require("../models/albumModels");
+const { fetchAlbumByID, fetchAllAlbumsById, fetchAlbumBySearch } = require("../models/albumModels");
 
 exports.getAlbumByID = (req,res)=>{
     const {spotify_id} = req.params;
@@ -7,10 +7,16 @@ exports.getAlbumByID = (req,res)=>{
         res.status(200).send(responseBody);
     })
 }
-
 exports.getAllAlbumsById = (req,res)=>{
     
     fetchAllAlbumsById().then((albums)=>{
         res.status(200).send(albums);
+    })
+}
+exports.getAlbumbyNameAndArtist = (req,res)=>{
+    const {artist, album} = req.query
+    fetchAlbumBySearch(artist, album)
+    .then((searchData)=>{
+        res.status(200).send(searchData)
     })
 }

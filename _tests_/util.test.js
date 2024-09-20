@@ -1,4 +1,4 @@
-const { sliceSpotifyIds } = require("../db/utils/spotifyIdUtils")
+const { sliceSpotifyIds, formatsHtmlQuery } = require("../db/utils/spotifyIdUtils")
 
 describe("UTIL TESTS",()=>{
     describe("sliceSpotifyIds",()=>{
@@ -16,6 +16,25 @@ describe("UTIL TESTS",()=>{
             const desiredOutput = ["0,1,2,3,4,5,6,7,8,9","10,11,12,13,14,15,16,17,18,19", "20,21"];
             
             expect(sliceSpotifyIds(ids)).toEqual(desiredOutput)
+        })
+    })
+    describe.only("replace spaces with pluses", ()=>{
+        test ("handles single word", ()=>{
+            const singleWord = "bath"
+
+            expect(formatsHtmlQuery(singleWord)).toBe(singleWord)
+        })
+        test ("handlesMultipleWords", ()=>{
+            const words = "big old bag of stick insects"
+            const wordsPlus = "big+old+bag+of+stick+insects"
+
+            expect(formatsHtmlQuery(words)).toBe(wordsPlus)
+        })
+        test ("removes punctuation", ()=>{
+            const cursedWords = "fishing!!"
+            const cursedWordsPlus = "fishing"
+
+            expect(formatsHtmlQuery(cursedWords)).toBe(cursedWordsPlus)
         })
     })
 })

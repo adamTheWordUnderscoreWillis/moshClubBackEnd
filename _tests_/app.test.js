@@ -181,4 +181,23 @@ describe("Spotify WebAPI Testing", ()=>{
             })
         })
     })
+    describe("Search for album by album and artist", ()=>{
+        test("200 - Sends Okay response code", ()=>{
+            return request(app).get("/api/search?artist=fat+dog&album=woof")
+            .expect(200)
+        })
+        test("200 - Returns albums in search to user", ()=>{
+            const desiredAlbumData = {
+                id: "5zuQQIzkoyry8lZrmW4744",
+                image: "https://i.scdn.co/image/ab67616d0000b273816feec57d019203c743a584",
+                name: "WOOF.",
+                artist: "Fat Dog"
+                }
+            return request(app).get("/api/search?artist=fat+dog&album=woof")
+            .expect(200)
+            .then(({body})=>{
+                expect(body[0]).toEqual(desiredAlbumData)
+            })
+        })
+    })
 })

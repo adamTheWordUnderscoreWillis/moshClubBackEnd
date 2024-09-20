@@ -15,3 +15,13 @@ exports.sliceSpotifyIds = (arrOfIds)=>{
     return masterArray.map((IdBatch)=>IdBatch.join(","))
     
 }
+
+exports.formatsHtmlQuery = (str)=>{
+    const regex = /(\W\D)/g
+    return str.split(" ").map((word)=>{
+        return word.replaceAll(regex, "")
+    }).join("+")
+    
+
+    
+}
