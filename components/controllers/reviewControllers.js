@@ -12,3 +12,6 @@ exports.createReview = (req, res)=>{
 exports.removeReviewById = (req,res)=>{
         res.status(204).send()
 }
+exports.getReviewsByAlbum = (req, res)=>{
+        res.status(200).send({msg: "Okay"})
+}

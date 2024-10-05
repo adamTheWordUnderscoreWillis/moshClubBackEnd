@@ -252,8 +252,14 @@ describe("Spotify WebAPI Testing", ()=>{
             })
         })
     })
+    describe.only("getReviewsByAlbum", ()=>{
+        test("Sends 200 status", ()=>{
+            return request(app)
+            .get("/api/reviews/5Am1LFOFRwS94TaVzrFQwZ").expect(200)
+        })
+    })
     describe("Delete review", ()=>{
-        test("204 Deletes review", ()=>{
+        test("Sends 204 Status Code", ()=>{
             return request(app)
             .delete("/api/review/3")
             .expect(204)
