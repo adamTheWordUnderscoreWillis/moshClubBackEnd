@@ -200,4 +200,56 @@ describe("Spotify WebAPI Testing", ()=>{
             })
         })
     })
+    describe.only("Post Review", ()=>{
+        const reviewBody = {
+            user_id: 4,
+            spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
+            slap: 5, 
+            zest: 5, 
+            stick: 5,
+            favourite_song: "Flawless Execution",
+            ten_words: "The album was poorly recieved, but a devestating wakeup call."
+
+        }
+        const responseBody = {
+            review_id: 4,
+            user_id: 4,
+            spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
+            slap: 5, 
+            zest: 5, 
+            stick: 5,
+            favourite_song: "Flawless Execution",
+            ten_words: "The album was poorly recieved, but a devestating wakeup call.",
+            created_at: expect.anything()
+
+        }
+        test("201 - Recieves Create Code", ()=>{
+            return request(app)
+            .post("/api/reviews")
+            .send(reviewBody)
+            .expect(201)
+        })
+        test("201 - Successfully posts review in the database", ()=>{
+           
+            return request(app)
+            .post("/api/reviews")
+            .send(reviewBody)
+            .expect(201).then(({body})=>{
+                expect(body.review).toEqual(responseBody)
+            })
+        })
+        test("Patching a review updates the album", ()=>{
+            return request(app)
+            .post("/api/reviews")
+            .send(reviewBody)
+            .expect(201).then(()=>{
+                return request(app).get("/api/albums")
+                .then(({body})=>{
+                    const targetAlbum = body.filter((album)=> album.id === reviewBody.spotify_id)[0]
+                    expect(targetAlbum.scoring).toEqual({slap: 5, zest: 5, stick: 5, score: 15 })
+                    expect(targetAlbum.review_count).toEqual(1)
+                })
+            })
+        })
+    })
 })

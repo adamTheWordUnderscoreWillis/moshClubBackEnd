@@ -70,5 +70,8 @@
 
 \c mosh_club_test
 
+UPDATE albums 
+SET slap = 0, zest = 0, stick = 0, score = 4, review_count = 2
+WHERE spotify_id = '5Am1LFOFRwS94TaVzrFQwZ';
 
 select * FROM albums;

@@ -43,8 +43,7 @@ const seed = ({reviewData, albumData, userData}) => {
                 review_id SERIAL PRIMARY KEY,
                 user_id INT,
                 FOREIGN KEY (user_id) REFERENCES users(user_id),
-                album_id INT,
-                FOREIGN KEY (album_id) REFERENCES albums(album_id),
+                spotify_id VARCHAR,
                 slap INT DEFAULT 0,
                 zest INT DEFAULT 0,
                 stick INT DEFAULT 0,
@@ -70,8 +69,8 @@ const seed = ({reviewData, albumData, userData}) => {
     })
     .then(()=>{
         const insertReviewsDataQuery = format(
-            'INSERT INTO reviews (user_id, album_id, slap, zest, stick) VALUES %L',
-            reviewData.map(({user_id, album_id, slap, zest, stick})=>[user_id, album_id, slap, zest, stick])
+            'INSERT INTO reviews (user_id, spotify_id, slap, zest, stick) VALUES %L',
+            reviewData.map(({user_id, spotify_id, slap, zest, stick})=>[user_id, spotify_id, slap, zest, stick])
         )
         return db.query(insertReviewsDataQuery);
     })
