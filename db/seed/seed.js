@@ -62,8 +62,8 @@ const seed = ({reviewData, albumData, userData}) => {
     })
     .then(()=>{
         const insertAlbumDataQuery = format(
-            'INSERT INTO albums (spotify_id, album_name, artist_name, user_id) VALUES %L',
-            albumData.map(({spotify_id ,album_name, artist_name, user_id})=>[spotify_id, album_name, artist_name, user_id])
+            'INSERT INTO albums (spotify_id, album_name, artist_name, user_id, slap, zest, stick, score, review_count) VALUES %L',
+            albumData.map(({spotify_id ,album_name, artist_name, user_id, slap, zest, stick, score, review_count})=>[spotify_id, album_name, artist_name, user_id,slap, zest, stick, score, review_count])
         )
         return db.query(insertAlbumDataQuery);
     })

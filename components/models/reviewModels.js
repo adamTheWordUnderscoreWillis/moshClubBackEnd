@@ -62,3 +62,23 @@ exports.addNewReview = (review)=>{
     .catch((err)=> console.log(err))
 
 }
+
+exports.checkReviewIdExists =(review_id)=>{
+    const queryStatment = `
+    SELECT * FROM reviews
+    WHERE review_id = $1`
+    return db
+    .query(queryStatment, [review_id])
+    .then(({rows})=> {
+        if(rows.length === 0){
+                return Promise.reject({
+                    status: 404,
+                    msg: `Review ${review_id} does not exist.`
+                })
+        }
+
+    })
+}
+exports.deleteReviewById = (review_id)=>{
+
+}

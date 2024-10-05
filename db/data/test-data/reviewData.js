@@ -20,9 +20,9 @@ module.exports = [
     {
         user_id: 3,
         spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
-        slap: 1, 
-        zest: 1, 
-        stick: 1,
+        slap: 3,
+        zest: 3, 
+        stick: 3,
         favourite_song: "Flawless Execution",
         ten_words: "Do not Like Pierce the Veil!"
     },
