@@ -1,4 +1,4 @@
-const { addNewReview } = require("../models/reviewModels")
+const { addNewReview, checkReviewIdExists, deleteReviewById } = require("../models/reviewModels")
 
 exports.createReview = (req, res)=>{
     const {body} = req
@@ -7,4 +7,8 @@ exports.createReview = (req, res)=>{
         res.status(201).send({review: body})
     })
     
+}
+
+exports.removeReviewById = (req,res)=>{
+        res.status(204).send()
 }

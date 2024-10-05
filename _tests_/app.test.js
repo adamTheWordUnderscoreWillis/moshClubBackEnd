@@ -200,7 +200,7 @@ describe("Spotify WebAPI Testing", ()=>{
             })
         })
     })
-    describe.only("Post Review", ()=>{
+    describe("Post Review", ()=>{
         const reviewBody = {
             user_id: 4,
             spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
@@ -246,10 +246,21 @@ describe("Spotify WebAPI Testing", ()=>{
                 return request(app).get("/api/albums")
                 .then(({body})=>{
                     const targetAlbum = body.filter((album)=> album.id === reviewBody.spotify_id)[0]
-                    expect(targetAlbum.scoring).toEqual({slap: 5, zest: 5, stick: 5, score: 15 })
-                    expect(targetAlbum.review_count).toEqual(1)
+                    expect(targetAlbum.scoring).toEqual({slap: 10, zest: 10, stick: 10, score: 30 })
+                    expect(targetAlbum.review_count).toEqual(4)
                 })
             })
+        })
+    })
+    describe("Delete review", ()=>{
+        test("204 Deletes review", ()=>{
+            return request(app)
+            .delete("/api/review/3")
+            .expect(204)
+            .then(({body})=>{
+                expect(body).not.toContain(expect.anything())
+            })
+
         })
     })
 })
