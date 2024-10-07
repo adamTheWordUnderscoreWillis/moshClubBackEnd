@@ -79,6 +79,18 @@ exports.checkReviewIdExists =(review_id)=>{
 
     })
 }
+exports.fetchAllReviewsByAlbumID =(spotify_id)=>{
+    const queryStatment = `
+    SELECT * FROM reviews
+    WHERE spotify_id = $1`
+    return db
+    .query(queryStatment, [spotify_id])
+    .then(({rows})=> {
+       console.log("rows: ",rows)
+        return rows;
+    })
+    .catch((err)=> console.log(err))
+}
 exports.deleteReviewById = (review_id)=>{
 
 }

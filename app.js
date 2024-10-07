@@ -13,7 +13,7 @@ app.get("/api/auth",getAuthorisationToken);
 app.get("/api/albums/:spotify_id", getAlbumByID);
 app.get("/api/albums", getAllAlbumsById);
 app.get("/api/search", getAlbumbyNameAndArtist);
-app.get("/api/reviews/:album_id", getReviewsByAlbum)
+app.get("/api/reviews/:spotify_id", getReviewsByAlbum)
 
 app.post("/api/reviews", createReview);
 
