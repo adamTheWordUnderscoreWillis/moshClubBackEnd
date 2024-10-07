@@ -252,8 +252,58 @@ describe("Spotify WebAPI Testing", ()=>{
             })
         })
     })
+    describe.only("getReviewsByAlbum", ()=>{
+        test("Sends 200 status", ()=>{
+            return request(app)
+            .get("/api/reviews/5Am1LFOFRwS94TaVzrFQwZ")
+            .expect(200)
+        })
+        test("Returns all reviews by album ID", ()=>{
+            const reviews = [
+                {
+                    user_id: 1,
+                    review_id: 1,
+                    created_at: expect.anything(),
+                    spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
+                    slap: 1, 
+                    zest: 1, 
+                    stick: 1,
+                    favourite_song: "Emergency Contact",
+                    ten_words: "It's great!"
+                },
+                {
+                    user_id: 2,
+                    review_id: 2,
+                    created_at: expect.anything(),
+                    spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
+                    slap: 1, 
+                    zest: 1, 
+                    stick: 1,
+                    favourite_song: "Emergency Contact",
+                    ten_words: "Hated it!"
+                },
+                {
+                    user_id: 3,
+                    review_id: 3,
+                    created_at: expect.anything(),
+                    spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
+                    slap: 3,
+                    zest: 3, 
+                    stick: 3,
+                    favourite_song: "Flawless Execution",
+                    ten_words: "Do not Like Pierce the Veil!"
+                },
+            ]
+            return request(app)
+            .get("/api/reviews/5Am1LFOFRwS94TaVzrFQwZ")
+            .expect(200)
+            .then(({body})=>{
+                expect(body).toEqual(reviews)
+            })
+        })
+    })
     describe("Delete review", ()=>{
-        test("204 Deletes review", ()=>{
+        test("Sends 204 Status Code", ()=>{
             return request(app)
             .delete("/api/review/3")
             .expect(204)

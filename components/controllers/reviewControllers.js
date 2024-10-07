@@ -1,4 +1,4 @@
-const { addNewReview, checkReviewIdExists, deleteReviewById } = require("../models/reviewModels")
+const { addNewReview, checkReviewIdExists, deleteReviewById, fetchAllReviewsByAlbumID } = require("../models/reviewModels")
 
 exports.createReview = (req, res)=>{
     const {body} = req
@@ -11,4 +11,11 @@ exports.createReview = (req, res)=>{
 
 exports.removeReviewById = (req,res)=>{
         res.status(204).send()
+}
+exports.getReviewsByAlbum = (req, res)=>{
+    const {spotify_id} = req.params
+    fetchAllReviewsByAlbumID(spotify_id).then((body)=>{
+        console.log(body)
+        res.status(200).send(body)
+    })
 }

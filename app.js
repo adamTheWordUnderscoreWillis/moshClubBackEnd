@@ -1,7 +1,7 @@
 
 const { getAlbumByID, getAllAlbumsById, getAlbumbyNameAndArtist } = require('./components/controllers/albumControllers');
 const { getAuthorisationToken } = require('./components/controllers/authorisationControllers');
-const { createReview, removeReviewById } = require('./components/controllers/reviewControllers');
+const { createReview, removeReviewById, getReviewsByAlbum } = require('./components/controllers/reviewControllers');
 
 const express = require('express');
 const app = express();
@@ -13,6 +13,7 @@ app.get("/api/auth",getAuthorisationToken);
 app.get("/api/albums/:spotify_id", getAlbumByID);
 app.get("/api/albums", getAllAlbumsById);
 app.get("/api/search", getAlbumbyNameAndArtist);
+app.get("/api/reviews/:spotify_id", getReviewsByAlbum)
 
 app.post("/api/reviews", createReview);
 
