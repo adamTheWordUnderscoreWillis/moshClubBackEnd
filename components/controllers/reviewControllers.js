@@ -10,12 +10,18 @@ exports.createReview = (req, res)=>{
 }
 
 exports.removeReviewById = (req,res)=>{
+    const {review_id}= req.params
+
+    checkReviewIdExists(review_id).then(()=>{
+        return deleteReviewById(review_id)
+    })
+    .then(()=>{
         res.status(204).send()
+    })
 }
 exports.getReviewsByAlbum = (req, res)=>{
     const {spotify_id} = req.params
     fetchAllReviewsByAlbumID(spotify_id).then((body)=>{
-        console.log(body)
         res.status(200).send(body)
     })
 }

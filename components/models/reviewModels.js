@@ -86,11 +86,15 @@ exports.fetchAllReviewsByAlbumID =(spotify_id)=>{
     return db
     .query(queryStatment, [spotify_id])
     .then(({rows})=> {
-       console.log("rows: ",rows)
         return rows;
     })
     .catch((err)=> console.log(err))
 }
 exports.deleteReviewById = (review_id)=>{
+    const queryStatment = `
+    DELETE FROM reviews
+    WHERE review_id = $1;`
+    const queryValues = [review_id]
 
+    return db.query(queryStatment, queryValues)
 }

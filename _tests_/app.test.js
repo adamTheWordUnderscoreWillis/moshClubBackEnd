@@ -252,7 +252,7 @@ describe("Spotify WebAPI Testing", ()=>{
             })
         })
     })
-    describe.only("getReviewsByAlbum", ()=>{
+    describe("getReviewsByAlbum", ()=>{
         test("Sends 200 status", ()=>{
             return request(app)
             .get("/api/reviews/5Am1LFOFRwS94TaVzrFQwZ")
@@ -302,7 +302,7 @@ describe("Spotify WebAPI Testing", ()=>{
             })
         })
     })
-    describe("Delete review", ()=>{
+    describe.only("Delete review", ()=>{
         test("Sends 204 Status Code", ()=>{
             return request(app)
             .delete("/api/review/3")
@@ -310,7 +310,42 @@ describe("Spotify WebAPI Testing", ()=>{
             .then(({body})=>{
                 expect(body).not.toContain(expect.anything())
             })
-
+        })
+        test("Deletes correct Review", ()=>{
+            const reviews = [
+                {
+                    user_id: 1,
+                    review_id: 1,
+                    created_at: expect.anything(),
+                    spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
+                    slap: 1, 
+                    zest: 1, 
+                    stick: 1,
+                    favourite_song: "Emergency Contact",
+                    ten_words: "It's great!"
+                },
+                {
+                    user_id: 2,
+                    review_id: 2,
+                    created_at: expect.anything(),
+                    spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
+                    slap: 1, 
+                    zest: 1, 
+                    stick: 1,
+                    favourite_song: "Emergency Contact",
+                    ten_words: "Hated it!"
+                },
+            ]
+            return request(app)
+            .delete("/api/review/3")
+            .expect(204)
+            .then(()=>{
+                return request(app)
+                .get("/api/reviews/5Am1LFOFRwS94TaVzrFQwZ")
+            })
+            .then(({body})=>{
+                expect(body).toEqual(reviews)
+            })
         })
     })
 })
