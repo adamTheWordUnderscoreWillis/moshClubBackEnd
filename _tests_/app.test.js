@@ -302,7 +302,7 @@ describe("Spotify WebAPI Testing", ()=>{
             })
         })
     })
-    describe.only("Delete review", ()=>{
+    describe("Delete review", ()=>{
         test("Sends 204 Status Code", ()=>{
             return request(app)
             .delete("/api/review/3")
@@ -345,6 +345,20 @@ describe("Spotify WebAPI Testing", ()=>{
             })
             .then(({body})=>{
                 expect(body).toEqual(reviews)
+            })
+        })
+        test("Updates the album data to lower the score and review count", ()=>{
+            return request(app)
+            .delete("/api/review/3")
+            .expect(204)
+            .then(()=>{
+                return request(app).get("/api/albums")
+            })
+            .then(({body})=>{
+                const targetAlbum = body.filter((album)=> album.id === "5Am1LFOFRwS94TaVzrFQwZ")[0]
+                    
+                    expect(targetAlbum.scoring).toEqual({slap: 2, zest: 2, stick: 2, score: 6 })
+                    expect(targetAlbum.review_count).toEqual(2)
             })
         })
     })

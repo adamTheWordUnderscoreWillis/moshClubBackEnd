@@ -32,7 +32,7 @@ exports.addNewReview = (review)=>{
 
         const {slap, zest, stick, spotify_id} = review
 
-        const targetedAlbum = albumsData.filter((album)=> album.spotify_id = spotify_id)[0]
+        const targetedAlbum = albumsData.filter((album)=> album.spotify_id === spotify_id)[0]
 
         const reviewCountTotal = targetedAlbum.review_count + 1
         const slapTotal = targetedAlbum.slap + slap
@@ -91,10 +91,55 @@ exports.fetchAllReviewsByAlbumID =(spotify_id)=>{
     .catch((err)=> console.log(err))
 }
 exports.deleteReviewById = (review_id)=>{
-    const queryStatment = `
+    const deleteQueryStatment = `
     DELETE FROM reviews
     WHERE review_id = $1;`
-    const queryValues = [review_id]
 
-    return db.query(queryStatment, queryValues)
+    const albumQueryStatement = `
+    SELECT * FROM albums`
+
+    const getAlbumData =  db.query(albumQueryStatement)
+    .then(({rows})=>{
+        const albumsData = rows
+        return albumsData
+    })
+
+    const reviewQueryStatement = `
+    SELECT * FROM reviews
+    WHERE review_id = $1;
+    `
+    const fetchReviwByIDQuery = db.query(reviewQueryStatement, [review_id]).then(({rows})=>{
+        return rows[0]
+    })
+
+    return Promise.all([fetchReviwByIDQuery, getAlbumData]).then(([review, albumsData])=>{
+        const {slap, zest, stick, spotify_id} = review
+
+        const targetedAlbum = albumsData.filter((album)=> album.spotify_id === spotify_id)[0]
+
+
+        const reviewCountTotal = targetedAlbum.review_count - 1
+        const slapTotal = targetedAlbum.slap - slap
+        const zestTotal = targetedAlbum.zest - zest
+        const stickTotal = targetedAlbum.stick - stick
+        const scoreTotal = targetedAlbum.score - (slap + zest + stick)
+
+        const updateAlbumsQueryStatement =`
+        UPDATE albums 
+        SET slap = $1, 
+        zest = $2, 
+        stick = $3, 
+        score = $4, 
+        review_count = $5
+        WHERE spotify_id = $6;`
+
+        
+        const updateAlbumsQueryValues = [slapTotal, zestTotal, stickTotal, scoreTotal, reviewCountTotal,spotify_id]
+
+        return db.query(updateAlbumsQueryStatement, updateAlbumsQueryValues)
+    })
+    .then(()=>{
+        return db.query(deleteQueryStatment, [review_id])
+    })
+
 }
