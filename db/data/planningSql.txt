@@ -1,7 +1,1 @@
-You are now connected to database "mosh_club_test" as user "adam".
- review_id | user_id |       spotify_id       | slap | zest | stick |  favourite_song   |  ten_words  |     created_at      
------------+---------+------------------------+------+------+-------+-------------------+-------------+---------------------
-         1 |       1 | 5Am1LFOFRwS94TaVzrFQwZ |    1 |    1 |     1 | Emergency Contact | It's great! | 2023-08-14 22:45:00
-         2 |       2 | 5Am1LFOFRwS94TaVzrFQwZ |    1 |    1 |     1 | Emergency Contact | Hated it!   | 
-(2 rows)
-
+You are now connected to database "mosh_club_test" as user "Willis".

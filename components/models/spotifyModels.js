@@ -18,7 +18,6 @@ exports.fetchAuthorisationToken = ()=> {
     return spotifyUrl
     .post("/api/token", options)
     .then(({data})=>{
-        fs.writeFile("./db/data/test-data/access_token.txt", data.access_token, "utf-8")
         return data
     })
 }

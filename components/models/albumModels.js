@@ -3,39 +3,28 @@ const fs = require("fs/promises")
 const db = require("../../db/index")
 const { sliceSpotifyIds, formatsHtmlQuery } = require("../../db/utils/spotifyIdUtils")
 
-exports.fetchAlbumByID = (spotify_id)=>{
-    return fs.readFile("./db/data/test-data/access_token.txt", "utf-8")
-    .then((accessToken)=>{
-        const spotifyUrl = axios.create({
-            baseURL: "https://api.spotify.com",
-            headers: {
-                "Authorization": "Bearer " + accessToken
-            }
-        })
-        return spotifyUrl.get(`/v1/albums/${spotify_id}`)
+exports.fetchAlbumByID = (spotify_id, accessToken)=>{
+
+    const spotifyUrl = axios.create({
+        baseURL: "https://api.spotify.com",
+        headers: {
+            "Authorization": "Bearer " + accessToken
+        }
     })
+    return spotifyUrl.get(`/v1/albums/${spotify_id}`)
     .then(({data})=>{
         return formatAlbumData(data)
     })
-    .catch((err)=>{
-        console.log(err)
-    })
 }
-exports.fetchAllAlbumsById = ()=>{
+exports.fetchAllAlbumsById = (accessToken)=>{
     const queryStatement = `
     SELECT * FROM albums`
 
-    const getIdsFromDatabase =  db.query(queryStatement)
+    return db.query(queryStatement)
     .then(({rows})=>{
         return rows
     })
-
-    const getToken =  fs.readFile("./db/data/test-data/access_token.txt", "utf-8")
-
-    return Promise.all([getIdsFromDatabase,getToken])
-    .then(([rows,accessToken])=>{
-
-        
+    .then((rows)=>{
         const spotifyUrl = axios.create({
             baseURL: "https://api.spotify.com",
             headers: {
@@ -72,22 +61,19 @@ exports.fetchAllAlbumsById = ()=>{
     })
 }
 
-exports.fetchAlbumBySearch = (artist, album)=>{
-    return fs.readFile("./db/data/test-data/access_token.txt", "utf-8")
-    .then((accessToken)=>{
+exports.fetchAlbumBySearch = (artist, album, accessToken)=>{
 
-        const spotifyUrl = axios.create({
-            baseURL: "https://api.spotify.com",
-            headers: {
-                "Authorization": "Bearer " + accessToken
-            }
-        })
-        
-        const formattedArtist = formatsHtmlQuery(artist)
-        const formattedAlbum = formatsHtmlQuery(album)
-        
-        return spotifyUrl.get(`/v1/search?q=${formattedAlbum}&artist=${formattedArtist}&type=album`)
+    const spotifyUrl = axios.create({
+        baseURL: "https://api.spotify.com",
+        headers: {
+            "Authorization": "Bearer " + accessToken
+        }
     })
+    
+    const formattedArtist = formatsHtmlQuery(artist)
+    const formattedAlbum = formatsHtmlQuery(album)
+    
+    return spotifyUrl.get(`/v1/search?q=${formattedAlbum}&artist=${formattedArtist}&type=album`)
     .then(({data})=>{
         const items = data.albums.items
 

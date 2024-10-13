@@ -28,8 +28,18 @@ describe("Spotify WebAPI Testing", ()=>{
     })
     describe("Get Album by ID - Get an album by a specific ID code", ()=>{
         test("200 - Returns Okay Status Code", ()=>{
-            return request(app).get("/api/albums/5zuQQIzkoyry8lZrmW4744")
-            .expect(200);
+            return request(app)
+            .get("/api/auth")
+            .then(({body})=>{
+                const authorisation = {
+                    accessToken: body.access_token
+                }
+                return request(app)
+                .post("/api/albums/5zuQQIzkoyry8lZrmW4744")
+                .send(authorisation)
+                .expect(200);
+                
+            })
         })
         test("200 - Returns Album data", ()=>{
             const desiredAlbumData = {
@@ -130,17 +140,38 @@ describe("Spotify WebAPI Testing", ()=>{
                     ]
                 }
             }
-            return request(app).get("/api/albums/5zuQQIzkoyry8lZrmW4744")
-            .expect(200)
+            return request(app)
+            .get("/api/auth")
             .then(({body})=>{
+                const authorisation = {
+                    accessToken: body.access_token
+                }
+                return request(app)
+                .post("/api/albums/5zuQQIzkoyry8lZrmW4744")
+                .send(authorisation)
+                .expect(200)
+                .then(({body})=>{
                 expect(body).toEqual(desiredAlbumData)
             })
+            })
+            
+            
         })
     })
     describe("Get All Albums by ID",()=>{
         test("200 - Returns Okay Status Code", ()=>{
-            return request(app).get("/api/albums")
-            .expect(200);
+            return request(app)
+            .get("/api/auth")
+            .then(({body})=>{
+                const authorisation = {
+                    accessToken: body.access_token
+                }
+                return request(app)
+                .post("/api/albums")
+                .send(authorisation)
+                .expect(200);
+                
+            })
         })
         test("200 - Returns Data for mulitple albums", ()=>{
             const desiredAlbumData = {
@@ -163,28 +194,46 @@ describe("Spotify WebAPI Testing", ()=>{
                     items: expect.anything()
                 }
             }
-            return request(app).get("/api/albums").then(({body})=>{
-                
-                expect(body[0].name).toEqual("The Jaws Of Life")
-                expect(body[1].name).toEqual("Black Widow")
-                expect(body[2].name).toEqual("RETAS")
-                expect(body[3].name).toEqual("Dark Adrenaline")
-
-                for(let i = 0; i<body.length; i++){
-                    expect(body).toEqual([
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData,
-                        desiredAlbumData
-                    ])
+            return request(app)
+            .get("/api/auth")
+            .then(({body})=>{
+                const authorisation = {
+                    accessToken: body.access_token
                 }
+                return request(app).post("/api/albums").send(authorisation).then(({body})=>{
+                
+                    expect(body[0].name).toEqual("The Jaws Of Life")
+                    expect(body[1].name).toEqual("Black Widow")
+                    expect(body[2].name).toEqual("RETAS")
+                    expect(body[3].name).toEqual("Dark Adrenaline")
+    
+                    for(let i = 0; i<body.length; i++){
+                        expect(body).toEqual([
+                            desiredAlbumData,
+                            desiredAlbumData,
+                            desiredAlbumData,
+                            desiredAlbumData
+                        ])
+                    }
+                })
             })
+            
         })
     })
     describe("Search for album by album and artist", ()=>{
         test("200 - Sends Okay response code", ()=>{
-            return request(app).get("/api/search?artist=fat+dog&album=woof")
-            .expect(200)
+            return request(app)
+            .get("/api/auth")
+            .then(({body})=>{
+                const authorisation = {
+                    accessToken: body.access_token
+                }
+                return request(app)
+                .post("/api/search?artist=fat+dog&album=woof")
+                .send(authorisation)
+                .expect(200)
+            })
+            
         })
         test("200 - Returns albums in search to user", ()=>{
             const desiredAlbumData = {
@@ -193,11 +242,21 @@ describe("Spotify WebAPI Testing", ()=>{
                 name: "WOOF.",
                 artist: "Fat Dog"
                 }
-            return request(app).get("/api/search?artist=fat+dog&album=woof")
-            .expect(200)
-            .then(({body})=>{
-                expect(body[0]).toEqual(desiredAlbumData)
-            })
+                return request(app)
+                .get("/api/auth")
+                .then(({body})=>{
+                    const authorisation = {
+                        accessToken: body.access_token
+                    }
+                    return request(app)
+                    .post("/api/search?artist=fat+dog&album=woof")
+                    .send(authorisation)
+                    .expect(200)
+                    .then(({body})=>{
+                        expect(body[0]).toEqual(desiredAlbumData)
+                    })
+                })
+            
         })
     })
     describe("Post Review", ()=>{
@@ -243,12 +302,21 @@ describe("Spotify WebAPI Testing", ()=>{
             .post("/api/reviews")
             .send(reviewBody)
             .expect(201).then(()=>{
-                return request(app).get("/api/albums")
+                return request(app)
+                .get("/api/auth")
                 .then(({body})=>{
-                    const targetAlbum = body.filter((album)=> album.id === reviewBody.spotify_id)[0]
-                    expect(targetAlbum.scoring).toEqual({slap: 10, zest: 10, stick: 10, score: 30 })
-                    expect(targetAlbum.review_count).toEqual(4)
-                })
+                    const authorisation = {
+                    accessToken: body.access_token
+                    }
+                    return request(app)
+                    .post("/api/albums")
+                    .send(authorisation)
+                    .then(({body})=>{
+                        const targetAlbum = body.filter((album)=> album.id === reviewBody.spotify_id)[0]
+                        expect(targetAlbum.scoring).toEqual({slap: 10, zest: 10, stick: 10, score: 30 })
+                        expect(targetAlbum.review_count).toEqual(4)
+                    })
+                })    
             })
         })
     })
@@ -352,7 +420,16 @@ describe("Spotify WebAPI Testing", ()=>{
             .delete("/api/review/3")
             .expect(204)
             .then(()=>{
-                return request(app).get("/api/albums")
+                return request(app)
+                .get("/api/auth")
+            })
+            .then(({body})=>{
+                const authorisation = {
+                    accessToken: body.access_token
+                }
+                return request(app)
+                .post("/api/albums")
+                .send(authorisation)
             })
             .then(({body})=>{
                 const targetAlbum = body.filter((album)=> album.id === "5Am1LFOFRwS94TaVzrFQwZ")[0]

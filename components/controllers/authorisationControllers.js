@@ -5,5 +5,5 @@ exports.getAuthorisationToken = (req,res, next)=>{
     .then((accessToken)=>{
         res.status(200).send(accessToken);
     })
-    
+    .catch((err)=>console.log(err))
 }
