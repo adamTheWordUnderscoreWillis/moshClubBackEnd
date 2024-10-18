@@ -14,9 +14,9 @@ app.get('/', (req, res) => {
   });
 
 app.get("/api/auth",getAuthorisationToken);
-app.post("/api/albums/:spotify_id", getAlbumByID);
-app.post("/api/albums", getAllAlbumsById);
-app.post("/api/search", getAlbumbyNameAndArtist);
+app.get("/api/albums/:spotify_id", getAlbumByID);
+app.get("/api/albums", getAllAlbumsById);
+app.get("/api/search", getAlbumbyNameAndArtist);
 
 app.get("/api/reviews/:spotify_id", getReviewsByAlbum)
 app.post("/api/reviews", createReview);

@@ -3,14 +3,15 @@ const fs = require("fs/promises")
 const db = require("../../db/index")
 const { sliceSpotifyIds, formatsHtmlQuery } = require("../../db/utils/spotifyIdUtils")
 
-exports.fetchAlbumByID = (spotify_id, accessToken)=>{
+exports.fetchAlbumByID = (spotify_id, access_token)=>{
 
     const spotifyUrl = axios.create({
         baseURL: "https://api.spotify.com",
         headers: {
-            "Authorization": "Bearer " + accessToken
+            "Authorization": "Bearer " + access_token
         }
     })
+
     return spotifyUrl.get(`/v1/albums/${spotify_id}`)
     .then(({data})=>{
         return formatAlbumData(data)

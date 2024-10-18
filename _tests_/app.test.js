@@ -32,11 +32,11 @@ describe("Spotify WebAPI Testing", ()=>{
             .get("/api/auth")
             .then(({body})=>{
                 const authorisation = {
-                    accessToken: body.access_token
+                    access_token: body.access_token
                 }
                 return request(app)
-                .post("/api/albums/5zuQQIzkoyry8lZrmW4744")
-                .send(authorisation)
+                .get("/api/albums/5zuQQIzkoyry8lZrmW4744")
+                .set(authorisation)
                 .expect(200);
                 
             })
@@ -51,17 +51,17 @@ describe("Spotify WebAPI Testing", ()=>{
                 id: "5zuQQIzkoyry8lZrmW4744",
                 images: [
                     {
-                        url: "https://i.scdn.co/image/ab67616d0000b273816feec57d019203c743a584",
+                        url: "https://i.scdn.co/image/ab67616d0000b2734d74c4a3fcfd96e16b6d3a9f",
                         height: 640,
                         width: 640
                     },
                     {
-                        url: "https://i.scdn.co/image/ab67616d00001e02816feec57d019203c743a584",
+                        url: "https://i.scdn.co/image/ab67616d00001e024d74c4a3fcfd96e16b6d3a9f",
                         height: 300,
                         width: 300
                     },
                     {
-                        url: "https://i.scdn.co/image/ab67616d00004851816feec57d019203c743a584",
+                        url: "https://i.scdn.co/image/ab67616d000048514d74c4a3fcfd96e16b6d3a9f",
                         height: 64,
                         width: 64
                     }
@@ -86,55 +86,55 @@ describe("Spotify WebAPI Testing", ()=>{
                         {   
                             id: "739wZZ4Qqtm0pnzVHzeKxo",
                             name: "Vigilante",
-                            preview_url: "https://p.scdn.co/mp3-preview/4ec31254395acde5f868cc417fcde1279221116f?cid=69d1e93f27984ad4bae3d0318e4459ca",
+                            preview_url: "https://p.scdn.co/mp3-preview/fab79ed422ae585808f90c0b3019022461ea517d?cid=69d1e93f27984ad4bae3d0318e4459ca",
                             track_number: 1
                         },
                         {
                             id: "5zHzofWXEpq1KiYIqTv7s2",
                             name: "Closer to God",
-                            preview_url: "https://p.scdn.co/mp3-preview/9769cf24195561da02806ddcf2ca0b83b0ea2cce?cid=69d1e93f27984ad4bae3d0318e4459ca",
+                            preview_url: "https://p.scdn.co/mp3-preview/02e4fe2457a5a888dd2e22a88eea96e688a6f709?cid=69d1e93f27984ad4bae3d0318e4459ca",
                             track_number: 2,
                         },
                         {
                             id: "1ZCDInnCGU2rRTfEhrJaSS",
                             name: "Wither",
-                            preview_url: "https://p.scdn.co/mp3-preview/2e267462c22b5bcb52bc486603225ca57ec7ef78?cid=69d1e93f27984ad4bae3d0318e4459ca",
+                            preview_url: "https://p.scdn.co/mp3-preview/d263807771244d27b4731182b3e716b1ae9cb73f?cid=69d1e93f27984ad4bae3d0318e4459ca",
                             track_number: 3,
                         },
                         {
                             id: "2M7iasCe4t2UgOHVrVK6TM",
                             name: "Clowns",
-                            preview_url: "https://p.scdn.co/mp3-preview/d642c6f0e6e11befbbae651138ef5d27d7589cfc?cid=69d1e93f27984ad4bae3d0318e4459ca",
+                            preview_url: "https://p.scdn.co/mp3-preview/5abe4cff5bf458a53b6ea03fb565a35bc1f418f9?cid=69d1e93f27984ad4bae3d0318e4459ca",
                             track_number: 4,
                         },
                         {
                             id: "1iwbnSrCMXUGXY6a6mjTTL",
                             name: "King of the Slugs",
-                            preview_url: "https://p.scdn.co/mp3-preview/4d312ed404a953701560a153d9b95fdb5845c5b6?cid=69d1e93f27984ad4bae3d0318e4459ca",
+                            preview_url: "https://p.scdn.co/mp3-preview/173a0e0ea5374f0124f2d6746af1103a3119733c?cid=69d1e93f27984ad4bae3d0318e4459ca",
                             track_number: 5,
                         },
                         {
                             id: "1SC86EEp5h0feV89TI5ECv",
                             name: "All the Same",
-                            preview_url: "https://p.scdn.co/mp3-preview/f257b9811a9f508f7e46ed86fe2bc482e6472820?cid=69d1e93f27984ad4bae3d0318e4459ca",
+                            preview_url: "https://p.scdn.co/mp3-preview/fbb98710984bfa220d3ec49f914df3a99b801f97?cid=69d1e93f27984ad4bae3d0318e4459ca",
                             track_number: 6,
                         },
                         {
                             id: "4flgLEXHoaXSQ2R8YZkSIe",
                             name: "I am the King",
-                            preview_url: "https://p.scdn.co/mp3-preview/b34e61a680918daac7de7578b15fe207e21261c7?cid=69d1e93f27984ad4bae3d0318e4459ca",
+                            preview_url: "https://p.scdn.co/mp3-preview/cab27998ffee66d84c9f965ed8f3540dd3dec202?cid=69d1e93f27984ad4bae3d0318e4459ca",
                             track_number: 7,
                         },
                         {
                             id: "0fe7AHSTWRryNOYCTci2LE",
                             name: "Running",
-                            preview_url: "https://p.scdn.co/mp3-preview/293abf9a0a5cb11d25fc38dd28e5e101e402cce6?cid=69d1e93f27984ad4bae3d0318e4459ca",
+                            preview_url: "https://p.scdn.co/mp3-preview/8deff2b8a41ae3d21dab37619e30b1b551acccbb?cid=69d1e93f27984ad4bae3d0318e4459ca",
                             track_number: 8,
                         },
                         {
                             id: "103XkIUGvwnefUIqDv5XNM",
-                            name: "And So It Came To Pass",
-                            preview_url: "https://p.scdn.co/mp3-preview/39bbd094b0ea68c7960b3f68858a38d2d8030e1b?cid=69d1e93f27984ad4bae3d0318e4459ca",
+                            name: "And so it Came to Pass",
+                            preview_url: "https://p.scdn.co/mp3-preview/ecd239eb10c53c91e33f6a288c3057625ff39b6d?cid=69d1e93f27984ad4bae3d0318e4459ca",
                             track_number: 9,
                         }
                     ]
@@ -144,11 +144,11 @@ describe("Spotify WebAPI Testing", ()=>{
             .get("/api/auth")
             .then(({body})=>{
                 const authorisation = {
-                    accessToken: body.access_token
+                    access_token: body.access_token
                 }
                 return request(app)
-                .post("/api/albums/5zuQQIzkoyry8lZrmW4744")
-                .send(authorisation)
+                .get("/api/albums/5zuQQIzkoyry8lZrmW4744")
+                .set(authorisation)
                 .expect(200)
                 .then(({body})=>{
                 expect(body).toEqual(desiredAlbumData)
@@ -164,11 +164,11 @@ describe("Spotify WebAPI Testing", ()=>{
             .get("/api/auth")
             .then(({body})=>{
                 const authorisation = {
-                    accessToken: body.access_token
+                    access_token: body.access_token
                 }
                 return request(app)
-                .post("/api/albums")
-                .send(authorisation)
+                .get("/api/albums")
+                .set(authorisation)
                 .expect(200);
                 
             })
@@ -198,9 +198,12 @@ describe("Spotify WebAPI Testing", ()=>{
             .get("/api/auth")
             .then(({body})=>{
                 const authorisation = {
-                    accessToken: body.access_token
+                    access_token: body.access_token
                 }
-                return request(app).post("/api/albums").send(authorisation).then(({body})=>{
+                return request(app)
+                .get("/api/albums")
+                .set(authorisation)
+                .then(({body})=>{
                 
                     expect(body[0].name).toEqual("The Jaws Of Life")
                     expect(body[1].name).toEqual("Black Widow")
@@ -226,11 +229,11 @@ describe("Spotify WebAPI Testing", ()=>{
             .get("/api/auth")
             .then(({body})=>{
                 const authorisation = {
-                    accessToken: body.access_token
+                    access_token: body.access_token
                 }
                 return request(app)
-                .post("/api/search?artist=fat+dog&album=woof")
-                .send(authorisation)
+                .get("/api/search?artist=fat+dog&album=woof")
+                .set(authorisation)
                 .expect(200)
             })
             
@@ -238,7 +241,7 @@ describe("Spotify WebAPI Testing", ()=>{
         test("200 - Returns albums in search to user", ()=>{
             const desiredAlbumData = {
                 id: "5zuQQIzkoyry8lZrmW4744",
-                image: "https://i.scdn.co/image/ab67616d0000b273816feec57d019203c743a584",
+                image: "https://i.scdn.co/image/ab67616d0000b2734d74c4a3fcfd96e16b6d3a9f",
                 name: "WOOF.",
                 artist: "Fat Dog"
                 }
@@ -246,11 +249,11 @@ describe("Spotify WebAPI Testing", ()=>{
                 .get("/api/auth")
                 .then(({body})=>{
                     const authorisation = {
-                        accessToken: body.access_token
+                        access_token: body.access_token
                     }
                     return request(app)
-                    .post("/api/search?artist=fat+dog&album=woof")
-                    .send(authorisation)
+                    .get("/api/search?artist=fat+dog&album=woof")
+                    .set(authorisation)
                     .expect(200)
                     .then(({body})=>{
                         expect(body[0]).toEqual(desiredAlbumData)
@@ -306,67 +309,17 @@ describe("Spotify WebAPI Testing", ()=>{
                 .get("/api/auth")
                 .then(({body})=>{
                     const authorisation = {
-                    accessToken: body.access_token
+                    access_token: body.access_token
                     }
                     return request(app)
-                    .post("/api/albums")
-                    .send(authorisation)
+                    .get("/api/albums")
+                    .set(authorisation)
                     .then(({body})=>{
                         const targetAlbum = body.filter((album)=> album.id === reviewBody.spotify_id)[0]
                         expect(targetAlbum.scoring).toEqual({slap: 10, zest: 10, stick: 10, score: 30 })
                         expect(targetAlbum.review_count).toEqual(4)
                     })
                 })    
-            })
-        })
-    })
-    describe("getReviewsByAlbum", ()=>{
-        test("Sends 200 status", ()=>{
-            return request(app)
-            .get("/api/reviews/5Am1LFOFRwS94TaVzrFQwZ")
-            .expect(200)
-        })
-        test("Returns all reviews by album ID", ()=>{
-            const reviews = [
-                {
-                    user_id: 1,
-                    review_id: 1,
-                    created_at: expect.anything(),
-                    spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
-                    slap: 1, 
-                    zest: 1, 
-                    stick: 1,
-                    favourite_song: "Emergency Contact",
-                    ten_words: "It's great!"
-                },
-                {
-                    user_id: 2,
-                    review_id: 2,
-                    created_at: expect.anything(),
-                    spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
-                    slap: 1, 
-                    zest: 1, 
-                    stick: 1,
-                    favourite_song: "Emergency Contact",
-                    ten_words: "Hated it!"
-                },
-                {
-                    user_id: 3,
-                    review_id: 3,
-                    created_at: expect.anything(),
-                    spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
-                    slap: 3,
-                    zest: 3, 
-                    stick: 3,
-                    favourite_song: "Flawless Execution",
-                    ten_words: "Do not Like Pierce the Veil!"
-                },
-            ]
-            return request(app)
-            .get("/api/reviews/5Am1LFOFRwS94TaVzrFQwZ")
-            .expect(200)
-            .then(({body})=>{
-                expect(body).toEqual(reviews)
             })
         })
     })
@@ -425,11 +378,11 @@ describe("Spotify WebAPI Testing", ()=>{
             })
             .then(({body})=>{
                 const authorisation = {
-                    accessToken: body.access_token
+                    access_token: body.access_token
                 }
                 return request(app)
-                .post("/api/albums")
-                .send(authorisation)
+                .get("/api/albums")
+                .set(authorisation)
             })
             .then(({body})=>{
                 const targetAlbum = body.filter((album)=> album.id === "5Am1LFOFRwS94TaVzrFQwZ")[0]

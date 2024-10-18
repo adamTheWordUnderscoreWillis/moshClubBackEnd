@@ -2,23 +2,23 @@ const { fetchAlbumByID, fetchAllAlbumsById, fetchAlbumBySearch } = require("../m
 
 exports.getAlbumByID = (req,res)=>{
     const {spotify_id} = req.params;
-    const {accessToken} = req.body;
+    const {access_token} = req.headers;
     
-    fetchAlbumByID(spotify_id, accessToken)
+    fetchAlbumByID(spotify_id, access_token)
     .then((responseBody)=>{
         res.status(200).send(responseBody);
     })
 }
 exports.getAllAlbumsById = (req,res)=>{
-    const {accessToken} = req.body;
-    fetchAllAlbumsById(accessToken).then((albums)=>{
+    const {access_token} = req.headers;
+    fetchAllAlbumsById(access_token).then((albums)=>{
         res.status(200).send(albums);
     })
 }
 exports.getAlbumbyNameAndArtist = (req,res)=>{
     const {artist, album} = req.query
-    const {accessToken} = req.body;
-    fetchAlbumBySearch(artist, album, accessToken)
+    const {access_token} = req.headers;
+    fetchAlbumBySearch(artist, album, access_token)
     .then((searchData)=>{
         res.status(200).send(searchData)
     })
