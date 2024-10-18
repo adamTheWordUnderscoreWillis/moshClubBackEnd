@@ -19,10 +19,26 @@ exports.fetchAlbumByID = (spotify_id, access_token)=>{
 }
 exports.fetchAllAlbumsById = (accessToken)=>{
     const queryStatement = `
-    SELECT * FROM albums`
+    SELECT *,
+
+    CASE WHEN review_count=0 THEN 0
+         ELSE CAST(zest/(review_count*5.0)*100 AS int)
+    END AS zest_percent,
+    CASE WHEN review_count=0 THEN 0
+         ELSE CAST(slap/(review_count*5.0)*100 AS int)
+    END AS slap_percent,
+    CASE WHEN review_count=0 THEN 0
+         ELSE CAST(stick/(review_count*5.0)*100 AS int)
+    END AS stick_percent,
+    CASE WHEN review_count=0 THEN 0
+         ELSE CAST(score/(review_count*15.0)*100 AS int)
+    END AS overall_percent  
+
+FROM albums;`
 
     return db.query(queryStatement)
     .then(({rows})=>{
+        console.log(rows[0])
         return rows
     })
     .then((rows)=>{
@@ -48,12 +64,13 @@ exports.fetchAllAlbumsById = (accessToken)=>{
         ResolvedAlbumPromises[0].map((databaseAlbum)=>{
             const albumIndex = spotifyAlbums.findIndex((spotifyAlbum)=> spotifyAlbum.id == databaseAlbum.spotify_id)
             const arrayOfDatabaseKeys = ["album_id", "user_id", "review_count"]
-            const arrayOfScoringKeys = ["slap", "zest", "stick", "score"]
+            const arrayOfScoringKeys = ["slap","slap_percent", "zest", "zest_percent", "stick", "stick_percent", "score", "overall_percent"]
 
             spotifyAlbums[albumIndex].scoring = {}
             arrayOfDatabaseKeys.map((key)=> spotifyAlbums[albumIndex][key] = databaseAlbum[key])
             arrayOfScoringKeys.map((key)=> spotifyAlbums[albumIndex].scoring[key] = databaseAlbum[key])
         })
+        console.log(spotifyAlbums)
         return spotifyAlbums
         
     })
@@ -108,5 +125,6 @@ function formatAlbumData(data) {
             album.tracks.items[i][key] = data.tracks.items[i][key]
         })
     }
+
     return album
 }

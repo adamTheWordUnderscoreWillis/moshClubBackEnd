@@ -158,7 +158,7 @@ describe("Spotify WebAPI Testing", ()=>{
             
         })
     })
-    describe("Get All Albums by ID",()=>{
+    describe.only("Get All Albums by ID",()=>{
         test("200 - Returns Okay Status Code", ()=>{
             return request(app)
             .get("/api/auth")

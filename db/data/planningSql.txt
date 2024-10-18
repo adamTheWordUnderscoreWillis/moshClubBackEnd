@@ -1,1 +1,9 @@
 You are now connected to database "mosh_club_test" as user "Willis".
+ zest | zest_percent | slap | slap_percent | stick | stick_percent | score | overall_percent | review_count 
+------+--------------+------+--------------+-------+---------------+-------+-----------------+--------------
+    0 |            0 |    0 |            0 |     0 |             0 |     0 |               0 |            0
+    0 |            0 |    0 |            0 |     0 |             0 |     0 |               0 |            0
+    0 |            0 |    0 |            0 |     0 |             0 |     0 |               0 |            0
+    2 |           20 |    2 |           20 |     2 |            20 |     6 |              20 |            2
+(4 rows)
+
