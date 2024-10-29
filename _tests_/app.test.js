@@ -158,7 +158,7 @@ describe("Spotify WebAPI Testing", ()=>{
             
         })
     })
-    describe.only("Get All Albums by ID",()=>{
+    describe("Get All Albums by ID",()=>{
         test("200 - Returns Okay Status Code", ()=>{
             return request(app)
             .get("/api/auth")
@@ -311,12 +311,22 @@ describe("Spotify WebAPI Testing", ()=>{
                     const authorisation = {
                     access_token: body.access_token
                     }
+                    const expectedAlbumScoringData = {
+                        "overall_percent": 50,
+                         "score": 30,
+                         "slap": 10,
+                        "slap_percent": 50,
+                         "stick": 10,
+                       "stick_percent": 50,
+                         "zest": 10,
+                        "zest_percent": 50,
+                       }
                     return request(app)
                     .get("/api/albums")
                     .set(authorisation)
                     .then(({body})=>{
                         const targetAlbum = body.filter((album)=> album.id === reviewBody.spotify_id)[0]
-                        expect(targetAlbum.scoring).toEqual({slap: 10, zest: 10, stick: 10, score: 30 })
+                        expect(targetAlbum.scoring).toEqual(expectedAlbumScoringData)
                         expect(targetAlbum.review_count).toEqual(4)
                     })
                 })    
@@ -369,6 +379,16 @@ describe("Spotify WebAPI Testing", ()=>{
             })
         })
         test("Updates the album data to lower the score and review count", ()=>{
+            const expectedAlbumScoringData = {
+                "overall_percent": 20,
+                 "score": 6,
+                 "slap": 2,
+                "slap_percent": 20,
+                 "stick": 2,
+               "stick_percent": 20,
+                 "zest": 2,
+                "zest_percent": 20,
+         }
             return request(app)
             .delete("/api/review/3")
             .expect(204)
@@ -380,6 +400,7 @@ describe("Spotify WebAPI Testing", ()=>{
                 const authorisation = {
                     access_token: body.access_token
                 }
+                
                 return request(app)
                 .get("/api/albums")
                 .set(authorisation)
@@ -387,7 +408,7 @@ describe("Spotify WebAPI Testing", ()=>{
             .then(({body})=>{
                 const targetAlbum = body.filter((album)=> album.id === "5Am1LFOFRwS94TaVzrFQwZ")[0]
                     
-                    expect(targetAlbum.scoring).toEqual({slap: 2, zest: 2, stick: 2, score: 6 })
+                    expect(targetAlbum.scoring).toEqual(expectedAlbumScoringData)
                     expect(targetAlbum.review_count).toEqual(2)
             })
         })

@@ -38,7 +38,6 @@ FROM albums;`
 
     return db.query(queryStatement)
     .then(({rows})=>{
-        console.log(rows[0])
         return rows
     })
     .then((rows)=>{
@@ -70,7 +69,6 @@ FROM albums;`
             arrayOfDatabaseKeys.map((key)=> spotifyAlbums[albumIndex][key] = databaseAlbum[key])
             arrayOfScoringKeys.map((key)=> spotifyAlbums[albumIndex].scoring[key] = databaseAlbum[key])
         })
-        console.log(spotifyAlbums)
         return spotifyAlbums
         
     })
