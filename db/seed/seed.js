@@ -41,14 +41,14 @@ const seed = ({reviewData, albumData, userData}) => {
             return db.query(
                 `CREATE TABLE reviews (
                 review_id SERIAL PRIMARY KEY,
-                user_id INT,
+                user_id INT NOT NULL,
                 FOREIGN KEY (user_id) REFERENCES users(user_id),
-                spotify_id VARCHAR,
-                slap INT DEFAULT 0.0,
-                zest INT DEFAULT 0,
-                stick INT DEFAULT 0,
-                favourite_song VARCHAR,
-                ten_Words VARCHAR,
+                spotify_id VARCHAR NOT NULL,
+                slap INT DEFAULT 0 NOT NULL,
+                zest INT DEFAULT 0 NOT NULL,
+                stick INT DEFAULT 0 NOT NULL,
+                favourite_song VARCHAR NOT NULL,
+                ten_Words VARCHAR NOT NULL,
                 created_At TIMESTAMP DEFAULT NOW()
                 );`
             );

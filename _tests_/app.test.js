@@ -8,11 +8,20 @@ beforeEach(() => seed(data));
 afterAll(() => db.end());
 
 describe("Spotify WebAPI Testing", ()=>{
-    describe("Get Authorization Token - Get an Access token for using the web API", ()=>{
-        test("200 - Returns Okay Status code",()=>{
+    describe("General Error Handling", ()=>{
+        test ("404: Returns error when route is not found", ()=>{
+            return request(app).get("/api/Not-a-valid-route")
+            .expect(404)
+            .then(({body})=>{
+                expect(body.msg).toBe("Does not exist")
+            })
+        })
+    })
+    describe("Get Authorization Token", ()=>{
+        test("200:  Returns Okay Status code",()=>{
             return request(app).get("/api/auth").expect(200);
         });
-        test ("200 - get access token from Spotify Web API",()=>{
+        test ("200: get access token from Spotify Web API",()=>{
             const desiredToken = {
                 access_token: expect.any(String),
                 token_type: "Bearer",
@@ -26,8 +35,8 @@ describe("Spotify WebAPI Testing", ()=>{
             })
         });
     })
-    describe("Get Album by ID - Get an album by a specific ID code", ()=>{
-        test("200 - Returns Okay Status Code", ()=>{
+    describe("Get Album by ID", ()=>{
+        test("200: Returns Okay Status Code", ()=>{
             return request(app)
             .get("/api/auth")
             .then(({body})=>{
@@ -41,7 +50,7 @@ describe("Spotify WebAPI Testing", ()=>{
                 
             })
         })
-        test("200 - Returns Album data", ()=>{
+        test("200: Returns Album data", ()=>{
             const desiredAlbumData = {
                 total_tracks: 9,
                 external_urls: {
@@ -157,9 +166,25 @@ describe("Spotify WebAPI Testing", ()=>{
             
             
         })
+        test("404: Album Id does not exist", ()=>{
+            return request(app)
+            .get("/api/auth")
+            .then(({body})=>{
+                const authorisation = {
+                    access_token: body.access_token
+                }
+                return request(app)
+                .get("/api/albums/DoesNotExist")
+                .set(authorisation)
+                .expect(404)
+                .then(({body})=>{
+                expect(body.msg).toEqual('Request failed with status code 400')
+            })
+            })
+        })
     })
-    describe.only("Get All Albums by ID",()=>{
-        test("200 - Returns Okay Status Code", ()=>{
+    describe("Get All Albums by ID",()=>{
+        test("200: Returns Okay Status Code", ()=>{
             return request(app)
             .get("/api/auth")
             .then(({body})=>{
@@ -173,7 +198,7 @@ describe("Spotify WebAPI Testing", ()=>{
                 
             })
         })
-        test("200 - Returns Data for mulitple albums", ()=>{
+        test("200: Returns Data for mulitple albums", ()=>{
             const desiredAlbumData = {
                 album_id: expect.any(Number),
                 user_id: expect.any(Number),
@@ -223,8 +248,8 @@ describe("Spotify WebAPI Testing", ()=>{
             
         })
     })
-    describe("Search for album by album and artist", ()=>{
-        test("200 - Sends Okay response code", ()=>{
+    describe("Search by artist and album", ()=>{
+        test("200: Sends Okay response code", ()=>{
             return request(app)
             .get("/api/auth")
             .then(({body})=>{
@@ -238,7 +263,7 @@ describe("Spotify WebAPI Testing", ()=>{
             })
             
         })
-        test("200 - Returns albums in search to user", ()=>{
+        test("200: Returns albums in search to user", ()=>{
             const desiredAlbumData = {
                 id: "5zuQQIzkoyry8lZrmW4744",
                 image: "https://i.scdn.co/image/ab67616d0000b2734d74c4a3fcfd96e16b6d3a9f",
@@ -260,6 +285,56 @@ describe("Spotify WebAPI Testing", ()=>{
                     })
                 })
             
+        })
+        test("400: No search data sent", ()=>{
+                return request(app)
+                .get("/api/auth")
+                .then(({body})=>{
+                    const authorisation = {
+                        access_token: body.access_token
+                    }
+                    return request(app)
+                    .get("/api/search?")
+                    .set(authorisation)
+                    .expect(400)
+                    .then(({body})=>{
+                        expect(body.msg).toEqual("You need to enter a valid artist and album.")
+                    })
+                })
+            
+        })
+        test("400: No album data sent", ()=>{
+                return request(app)
+                .get("/api/auth")
+                .then(({body})=>{
+                    const authorisation = {
+                        access_token: body.access_token
+                    }
+                    return request(app)
+                    .get("/api/search?artist=fat+dog")
+                    .set(authorisation)
+                    .expect(400)
+                    .then(({body})=>{
+                        expect(body.msg).toEqual("You need to enter a valid artist and album.")
+                    })
+                })
+            
+        })
+        test("400: No artist data sent", ()=>{
+            return request(app)
+            .get("/api/auth")
+            .then(({body})=>{
+                const authorisation = {
+                    access_token: body.access_token
+                }
+                return request(app)
+                .get("/api/search?album=woof")
+                .set(authorisation)
+                .expect(400)
+                .then(({body})=>{
+                    expect(body.msg).toEqual("You need to enter a valid artist and album.")
+                })
+            })
         })
     })
     describe("Post Review", ()=>{
@@ -285,46 +360,99 @@ describe("Spotify WebAPI Testing", ()=>{
             created_at: expect.anything()
 
         }
-        test("201 - Recieves Create Code", ()=>{
+        test("201: Recieves Create Code", ()=>{
             return request(app)
-            .post("/api/reviews")
-            .send(reviewBody)
-            .expect(201)
+            .get("/api/auth").then(({body})=>{
+                const authorisation = {
+                    access_token: body.access_token
+                }
+                return request(app)
+                .post("/api/reviews")
+                .set(authorisation)
+                .send(reviewBody)
+                .expect(201)
+            })
+            
         })
-        test("201 - Successfully posts review in the database", ()=>{
-           
+        test("201: Successfully posts review in the database", ()=>{
             return request(app)
-            .post("/api/reviews")
-            .send(reviewBody)
-            .expect(201).then(({body})=>{
+            .get("/api/auth")
+            .then(({body})=>{
+                const authorisation = {
+                    access_token: body.access_token
+                }
+                return request(app)
+                .post("/api/reviews")
+                .set(authorisation)
+                .send(reviewBody)
+                .expect(201)
+            })
+            .then(({body})=>{
                 expect(body.review).toEqual(responseBody)
             })
         })
-        test("Patching a review updates the album", ()=>{
+        test("201: Patching a review updates the album", ()=>{
             return request(app)
-            .post("/api/reviews")
-            .send(reviewBody)
-            .expect(201).then(()=>{
+            .get("/api/auth")
+            .then(({body})=>{
+                const authorisation = {
+                    access_token: body.access_token
+                }
+                return request(app)
+                .post("/api/reviews")
+                .set(authorisation)
+                .send(reviewBody)
+                .expect(201)
+            })
+            .then(()=>{
                 return request(app)
                 .get("/api/auth")
-                .then(({body})=>{
-                    const authorisation = {
-                    access_token: body.access_token
+            })
+            .then(({body})=>{
+                const authorisation = {
+                access_token: body.access_token
+                }
+                
+                return request(app)
+                .get("/api/albums")
+                .set(authorisation)
+            })    
+            .then(({body})=>{
+                const expectedAlbumScoringData = {
+                    "overall_percent": 50,
+                        "score": 30,
+                        "slap": 10,
+                    "slap_percent": 50,
+                        "stick": 10,
+                    "stick_percent": 50,
+                        "zest": 10,
+                    "zest_percent": 50,
                     }
-                    return request(app)
-                    .get("/api/albums")
-                    .set(authorisation)
-                    .then(({body})=>{
-                        const targetAlbum = body.filter((album)=> album.id === reviewBody.spotify_id)[0]
-                        expect(targetAlbum.scoring).toEqual({slap: 10, zest: 10, stick: 10, score: 30 })
-                        expect(targetAlbum.review_count).toEqual(4)
-                    })
-                })    
+                const targetAlbum = body.filter((album)=> album.id === reviewBody.spotify_id)[0]
+                expect(targetAlbum.scoring).toEqual(expectedAlbumScoringData)
+                expect(targetAlbum.review_count).toEqual(4)
+            })
+        })
+        test("400: Missing field in request body", ()=>{
+            const wrongAlbumReviewBody = {
+                user_id: 4,
+                spotify_id: "5Am1NotARealAlubmFQwZ", 
+                zest: 5, 
+                stick: 5,
+                favourite_song: "Impossible to say.",
+                ten_words: "Didn't listen to it. Fantastic."
+    
+            }
+            return request(app)
+            .post("/api/reviews")
+            .send(wrongAlbumReviewBody)
+            .expect(400).then(({body})=>{
+                expect(body.msg).toBe('Invalid input for slap')
             })
         })
     })
     describe("Delete review", ()=>{
-        test("Sends 204 Status Code", ()=>{
+        test("204: Recieves No Content Status code", ()=>{
             return request(app)
             .delete("/api/review/3")
             .expect(204)
@@ -332,7 +460,7 @@ describe("Spotify WebAPI Testing", ()=>{
                 expect(body).not.toContain(expect.anything())
             })
         })
-        test("Deletes correct Review", ()=>{
+        test("204: Deletes correct Review", ()=>{
             const reviews = [
                 {
                     user_id: 1,
@@ -368,7 +496,17 @@ describe("Spotify WebAPI Testing", ()=>{
                 expect(body).toEqual(reviews)
             })
         })
-        test("Updates the album data to lower the score and review count", ()=>{
+        test("204: Updates the album data to lower the score and review count", ()=>{
+            const expectedAlbumScoringData = {
+                "overall_percent": 20,
+                 "score": 6,
+                 "slap": 2,
+                "slap_percent": 20,
+                 "stick": 2,
+               "stick_percent": 20,
+                 "zest": 2,
+                "zest_percent": 20,
+         }
             return request(app)
             .delete("/api/review/3")
             .expect(204)
@@ -380,6 +518,7 @@ describe("Spotify WebAPI Testing", ()=>{
                 const authorisation = {
                     access_token: body.access_token
                 }
+                
                 return request(app)
                 .get("/api/albums")
                 .set(authorisation)
@@ -387,9 +526,17 @@ describe("Spotify WebAPI Testing", ()=>{
             .then(({body})=>{
                 const targetAlbum = body.filter((album)=> album.id === "5Am1LFOFRwS94TaVzrFQwZ")[0]
                     
-                    expect(targetAlbum.scoring).toEqual({slap: 2, zest: 2, stick: 2, score: 6 })
+                    expect(targetAlbum.scoring).toEqual(expectedAlbumScoringData)
                     expect(targetAlbum.review_count).toEqual(2)
             })
         })
+        test("404: The Review does not exist.",()=>{
+            return request(app)
+            .delete("/api/review/9999")
+            .expect(404).then(({body})=>{
+                expect(body.msg).toBe("Review 9999 does not exist.")
+            })
+        })
+
     })
 })
