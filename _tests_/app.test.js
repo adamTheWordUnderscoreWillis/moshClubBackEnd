@@ -8,11 +8,20 @@ beforeEach(() => seed(data));
 afterAll(() => db.end());
 
 describe("Spotify WebAPI Testing", ()=>{
+    describe("General Error Handling", ()=>{
+        test ("404: Returns error when route is not found", ()=>{
+            return request(app).get("/api/Not-a-valid-route")
+            .expect(404)
+            .then(({body})=>{
+                expect(body.msg).toBe("Does not exist")
+            })
+        })
+    })
     describe("Get Authorization Token - Get an Access token for using the web API", ()=>{
-        test("200 - Returns Okay Status code",()=>{
+        test("200:  Returns Okay Status code",()=>{
             return request(app).get("/api/auth").expect(200);
         });
-        test ("200 - get access token from Spotify Web API",()=>{
+        test ("200: get access token from Spotify Web API",()=>{
             const desiredToken = {
                 access_token: expect.any(String),
                 token_type: "Bearer",
@@ -27,7 +36,7 @@ describe("Spotify WebAPI Testing", ()=>{
         });
     })
     describe("Get Album by ID - Get an album by a specific ID code", ()=>{
-        test("200 - Returns Okay Status Code", ()=>{
+        test("200: Returns Okay Status Code", ()=>{
             return request(app)
             .get("/api/auth")
             .then(({body})=>{
@@ -41,7 +50,7 @@ describe("Spotify WebAPI Testing", ()=>{
                 
             })
         })
-        test("200 - Returns Album data", ()=>{
+        test("200: Returns Album data", ()=>{
             const desiredAlbumData = {
                 total_tracks: 9,
                 external_urls: {
@@ -156,6 +165,22 @@ describe("Spotify WebAPI Testing", ()=>{
             })
             
             
+        })
+        test.only("404: Album Id does not exist", ()=>{
+            return request(app)
+            .get("/api/auth")
+            .then(({body})=>{
+                const authorisation = {
+                    access_token: body.access_token
+                }
+                return request(app)
+                .get("/api/albums/DoesNotExist")
+                .set(authorisation)
+                .expect(404)
+                .then(({body})=>{
+                expect(body.msg).toEqual('Request failed with status code 400')
+            })
+            })
         })
     })
     describe("Get All Albums by ID",()=>{
