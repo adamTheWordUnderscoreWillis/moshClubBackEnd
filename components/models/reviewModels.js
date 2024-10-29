@@ -29,7 +29,6 @@ exports.addNewReview = (review)=>{
 
     return Promise.all([getAlbumData, postReviewQuery])
     .then(([albumsData,review])=>{
-
         const {slap, zest, stick, spotify_id} = review
 
         const targetedAlbum = albumsData.filter((album)=> album.spotify_id === spotify_id)[0]
@@ -59,7 +58,6 @@ exports.addNewReview = (review)=>{
     .then((newReview)=>{
         return newReview
     })
-    .catch((err)=> console.log(err))
 
 }
 

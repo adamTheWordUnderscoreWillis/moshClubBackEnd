@@ -362,57 +362,92 @@ describe("Spotify WebAPI Testing", ()=>{
         }
         test("201: Recieves Create Code", ()=>{
             return request(app)
-            .post("/api/reviews")
-            .send(reviewBody)
-            .expect(201)
+            .get("/api/auth").then(({body})=>{
+                const authorisation = {
+                    access_token: body.access_token
+                }
+                return request(app)
+                .post("/api/reviews")
+                .set(authorisation)
+                .send(reviewBody)
+                .expect(201)
+            })
+            
         })
         test("201: Successfully posts review in the database", ()=>{
-           
             return request(app)
-            .post("/api/reviews")
-            .send(reviewBody)
-            .expect(201).then(({body})=>{
+            .get("/api/auth")
+            .then(({body})=>{
+                const authorisation = {
+                    access_token: body.access_token
+                }
+                return request(app)
+                .post("/api/reviews")
+                .set(authorisation)
+                .send(reviewBody)
+                .expect(201)
+            })
+            .then(({body})=>{
                 expect(body.review).toEqual(responseBody)
             })
         })
         test("201: Patching a review updates the album", ()=>{
             return request(app)
-            .post("/api/reviews")
-            .send(reviewBody)
-            .expect(201).then(()=>{
+            .get("/api/auth")
+            .then(({body})=>{
+                const authorisation = {
+                    access_token: body.access_token
+                }
+                return request(app)
+                .post("/api/reviews")
+                .set(authorisation)
+                .send(reviewBody)
+                .expect(201)
+            })
+            .then(()=>{
                 return request(app)
                 .get("/api/auth")
-                .then(({body})=>{
-                    const authorisation = {
-                    access_token: body.access_token
+            })
+            .then(({body})=>{
+                const authorisation = {
+                access_token: body.access_token
+                }
+                
+                return request(app)
+                .get("/api/albums")
+                .set(authorisation)
+            })    
+            .then(({body})=>{
+                const expectedAlbumScoringData = {
+                    "overall_percent": 50,
+                        "score": 30,
+                        "slap": 10,
+                    "slap_percent": 50,
+                        "stick": 10,
+                    "stick_percent": 50,
+                        "zest": 10,
+                    "zest_percent": 50,
                     }
-                    const expectedAlbumScoringData = {
-                        "overall_percent": 50,
-                         "score": 30,
-                         "slap": 10,
-                        "slap_percent": 50,
-                         "stick": 10,
-                       "stick_percent": 50,
-                         "zest": 10,
-                        "zest_percent": 50,
-                       }
-                    return request(app)
-                    .get("/api/albums")
-                    .set(authorisation)
-                    .then(({body})=>{
-                        const targetAlbum = body.filter((album)=> album.id === reviewBody.spotify_id)[0]
-                        expect(targetAlbum.scoring).toEqual(expectedAlbumScoringData)
-                        expect(targetAlbum.review_count).toEqual(4)
-                    })
-                })    
+                const targetAlbum = body.filter((album)=> album.id === reviewBody.spotify_id)[0]
+                expect(targetAlbum.scoring).toEqual(expectedAlbumScoringData)
+                expect(targetAlbum.review_count).toEqual(4)
             })
         })
-        test("400: Album does not exist", ()=>{
+        test("400: Missing field in request body", ()=>{
+            const wrongAlbumReviewBody = {
+                user_id: 4,
+                spotify_id: "5Am1NotARealAlubmFQwZ", 
+                zest: 5, 
+                stick: 5,
+                favourite_song: "Impossible to say.",
+                ten_words: "Didn't listen to it. Fantastic."
+    
+            }
             return request(app)
             .post("/api/reviews")
-            .send(reviewBody)
-            .expect(201).then(({body})=>{
-                expect(body.review).toEqual(responseBody)
+            .send(wrongAlbumReviewBody)
+            .expect(400).then(({body})=>{
+                expect(body.msg).toBe('Invalid input for slap')
             })
         })
     })
@@ -495,5 +530,6 @@ describe("Spotify WebAPI Testing", ()=>{
                     expect(targetAlbum.review_count).toEqual(2)
             })
         })
+        
     })
 })

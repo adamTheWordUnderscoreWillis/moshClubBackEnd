@@ -1,11 +1,14 @@
+const { fetchAlbumByID, checkAlbumIDExists } = require("../models/albumModels")
 const { addNewReview, checkReviewIdExists, deleteReviewById, fetchAllReviewsByAlbumID } = require("../models/reviewModels")
+const { getAlbumByID } = require("./albumControllers")
 
-exports.createReview = (req, res)=>{
+exports.createReview = (req, res, next)=>{
     const {body} = req
     addNewReview(body)
     .then((body)=>{
         res.status(201).send({review: body})
     })
+    .catch((err)=> next(err))
     
 }
 
