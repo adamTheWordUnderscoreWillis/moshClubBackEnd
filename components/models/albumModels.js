@@ -85,7 +85,12 @@ exports.fetchAlbumBySearch = (artist, album, accessToken)=>{
             "Authorization": "Bearer " + accessToken
         }
     })
-    
+    if(!album|| !artist){
+        return Promise.reject({
+            status: 400,
+            msg: "You need to enter a valid artist and album."
+        })
+    }
     const formattedArtist = formatsHtmlQuery(artist)
     const formattedAlbum = formatsHtmlQuery(album)
     

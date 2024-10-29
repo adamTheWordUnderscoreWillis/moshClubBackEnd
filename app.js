@@ -5,7 +5,7 @@ const { createReview, removeReviewById, getReviewsByAlbum } = require('./compone
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const { handle404Errors, handleServerErrors, handleAxiosErrors } = require('./components/controllers/errorhandling');
+const { handle404Errors, handleServerErrors, handleAxiosErrors, handleCustomErrors } = require('./components/controllers/errorhandling');
 
 app.use(cors());
 app.use(express.json())
@@ -24,6 +24,7 @@ app.post("/api/reviews", createReview);
 
 app.delete("/api/review/:review_id", removeReviewById)
 
+app.use(handleCustomErrors)
 app.use(handleAxiosErrors);
 app.use(handleServerErrors);
 
