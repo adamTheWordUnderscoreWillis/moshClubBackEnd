@@ -530,6 +530,13 @@ describe("Spotify WebAPI Testing", ()=>{
                     expect(targetAlbum.review_count).toEqual(2)
             })
         })
-        
+        test("404: The Review does not exist.",()=>{
+            return request(app)
+            .delete("/api/review/9999")
+            .expect(404).then(({body})=>{
+                expect(body.msg).toBe("Review 9999 does not exist.")
+            })
+        })
+
     })
 })
