@@ -4,10 +4,10 @@ module.exports = [
         album_name: "The Jaws of Life",
         artist_name: "Pierce The Veil",
         user_id: 1,
-        slap: 28.5,
+        slap: 28,
         zest: 23,
         stick: 22,
-        score: 73.5,
+        score: 73,
         review_count: 8
 
     },

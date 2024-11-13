@@ -12,7 +12,7 @@ module.exports = [
     {
         user_id: 1,
         spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
-        slap: 4, 
+        slap: 4.5, 
         zest: 4, 
         stick: 2,
         favourite_song: "Flawless Execution",
