@@ -28,11 +28,9 @@ const seed = ({reviewData, albumData, userData}) => {
                 artist_name VARCHAR NOT NULL,
                 user_id INT,
                 FOREIGN KEY (user_id) REFERENCES users(user_id),
-                album_image_url VARCHAR,
-                slap INT DEFAULT 0,
-                zest INT DEFAULT 0,
-                stick INT DEFAULT 0,
-                score INT DEFAULT 0,
+                slap DECIMAL(4,1) DEFAULT 0.0,
+                zest DECIMAL(4,1) DEFAULT 0.0,
+                stick DECIMAL(4,1) DEFAULT 0.0,
                 review_count INT DEFAULT 0
                 );`
             );
@@ -44,9 +42,9 @@ const seed = ({reviewData, albumData, userData}) => {
                 user_id INT NOT NULL,
                 FOREIGN KEY (user_id) REFERENCES users(user_id),
                 spotify_id VARCHAR NOT NULL,
-                slap INT DEFAULT 0 NOT NULL,
-                zest INT DEFAULT 0 NOT NULL,
-                stick INT DEFAULT 0 NOT NULL,
+                slap DECIMAL(2,1) DEFAULT 0.0 NOT NULL,
+                zest DECIMAL(2,1) DEFAULT 0.0 NOT NULL,
+                stick DECIMAL(2,1) DEFAULT 0.0 NOT NULL,
                 favourite_song VARCHAR NOT NULL,
                 ten_Words VARCHAR NOT NULL,
                 created_At TIMESTAMP DEFAULT NOW()
@@ -62,8 +60,8 @@ const seed = ({reviewData, albumData, userData}) => {
     })
     .then(()=>{
         const insertAlbumDataQuery = format(
-            'INSERT INTO albums (spotify_id, album_name, artist_name, user_id, slap, zest, stick, score, review_count) VALUES %L',
-            albumData.map(({spotify_id ,album_name, artist_name, user_id, slap, zest, stick, score, review_count})=>[spotify_id, album_name, artist_name, user_id,slap, zest, stick, score, review_count])
+            'INSERT INTO albums (spotify_id, album_name, artist_name, user_id, slap, zest, stick, review_count) VALUES %L',
+            albumData.map(({spotify_id ,album_name, artist_name, user_id, slap, zest, stick, review_count})=>[spotify_id, album_name, artist_name, user_id,slap, zest, stick, review_count])
         )
         return db.query(insertAlbumDataQuery);
     })

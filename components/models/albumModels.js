@@ -20,7 +20,7 @@ exports.fetchAlbumByID = (spotify_id, access_token)=>{
 exports.fetchAllAlbumsById = (accessToken)=>{
     const queryStatement = `
     SELECT *,
-
+    SUM(zest + slap + stick) AS score,
     CASE WHEN review_count=0 THEN 0
          ELSE CAST(zest/(review_count*5.0)*100 AS int)
     END AS zest_percent,
@@ -31,10 +31,12 @@ exports.fetchAllAlbumsById = (accessToken)=>{
          ELSE CAST(stick/(review_count*5.0)*100 AS int)
     END AS stick_percent,
     CASE WHEN review_count=0 THEN 0
-         ELSE CAST(score/(review_count*15.0)*100 AS int)
+         ELSE CAST((zest+slap+stick)/(review_count*15.0)*100 AS int)
     END AS overall_percent  
 
-FROM albums;`
+FROM albums
+GROUP BY albums.album_id
+ORDER BY overall_percent DESC;`
 
     return db.query(queryStatement)
     .then(({rows})=>{

@@ -231,9 +231,9 @@ describe("Spotify WebAPI Testing", ()=>{
                 .then(({body})=>{
                 
                     expect(body[0].name).toEqual("The Jaws Of Life")
-                    expect(body[1].name).toEqual("Black Widow")
-                    expect(body[2].name).toEqual("RETAS")
-                    expect(body[3].name).toEqual("Dark Adrenaline")
+                    expect(body[1].name).toEqual("Dark Adrenaline")
+                    expect(body[2].name).toEqual("Black Widow")
+                    expect(body[3].name).toEqual("RETAS")
     
                     for(let i = 0; i<body.length; i++){
                         expect(body).toEqual([
@@ -352,9 +352,9 @@ describe("Spotify WebAPI Testing", ()=>{
             review_id: 4,
             user_id: 4,
             spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
-            slap: 5, 
-            zest: 5, 
-            stick: 5,
+            slap: "5.0", 
+            zest: "5.0", 
+            stick: "5.0",
             favourite_song: "Flawless Execution",
             ten_words: "The album was poorly recieved, but a devestating wakeup call.",
             created_at: expect.anything()
@@ -420,12 +420,12 @@ describe("Spotify WebAPI Testing", ()=>{
             .then(({body})=>{
                 const expectedAlbumScoringData = {
                     "overall_percent": 50,
-                        "score": 30,
-                        "slap": 10,
+                        "score": "30.0",
+                        "slap": "10.0",
                     "slap_percent": 50,
-                        "stick": 10,
+                        "stick": "10.0",
                     "stick_percent": 50,
-                        "zest": 10,
+                        "zest": "10.0",
                     "zest_percent": 50,
                     }
                 const targetAlbum = body.filter((album)=> album.id === reviewBody.spotify_id)[0]
@@ -467,9 +467,9 @@ describe("Spotify WebAPI Testing", ()=>{
                     review_id: 1,
                     created_at: expect.anything(),
                     spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
-                    slap: 1, 
-                    zest: 1, 
-                    stick: 1,
+                    slap: "1.0", 
+                    zest: "1.0", 
+                    stick: "1.0",
                     favourite_song: "Emergency Contact",
                     ten_words: "It's great!"
                 },
@@ -478,9 +478,9 @@ describe("Spotify WebAPI Testing", ()=>{
                     review_id: 2,
                     created_at: expect.anything(),
                     spotify_id: "5Am1LFOFRwS94TaVzrFQwZ",
-                    slap: 1, 
-                    zest: 1, 
-                    stick: 1,
+                    slap: "1.0", 
+                    zest: "1.0", 
+                    stick: "1.0",
                     favourite_song: "Emergency Contact",
                     ten_words: "Hated it!"
                 },
@@ -499,12 +499,12 @@ describe("Spotify WebAPI Testing", ()=>{
         test("204: Updates the album data to lower the score and review count", ()=>{
             const expectedAlbumScoringData = {
                 "overall_percent": 20,
-                 "score": 6,
-                 "slap": 2,
+                 "score": "6.0",
+                 "slap": "2.0",
                 "slap_percent": 20,
-                 "stick": 2,
+                 "stick": "2.0",
                "stick_percent": 20,
-                 "zest": 2,
+                 "zest": "2.0",
                 "zest_percent": 20,
          }
             return request(app)
