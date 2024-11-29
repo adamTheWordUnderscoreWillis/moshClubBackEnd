@@ -939,5 +939,478 @@ module.exports = [
         ten_words: "Definetly got them hooks, but I'm not convinced I'll return.",
         created_at: new Date('April 1, 2024 16:43:00 GMT+00:00')
     },
+    {
+        user_id: 7,
+        spotify_id: "3CbnypX7USK374jsTQbXg9",
+        slap: 3.5,
+        stick:3,
+        zest:2,
+        favourite_song: "Day Seeker",
+        ten_words: "On the cusp of good, generic feeling leaves something missing.",
+        created_at: new Date('April 13, 2024 09:55:16 GMT+00:00')
+    },
+    {
+        user_id: 1,
+        spotify_id: "3CbnypX7USK374jsTQbXg9",
+        slap: 5,
+        stick:4,
+        zest:2.5,
+        favourite_song: "Day Seeker",
+        ten_words: "Short and slappy, a huge step up from Primrose Path",
+        created_at: new Date('April 13, 2024 09:59:17 GMT+00:00')
+    },
+    {
+        user_id: 2,
+        spotify_id: "3CbnypX7USK374jsTQbXg9",
+        slap: 4.5,
+        stick:4,
+        zest:3.5,
+        favourite_song: "Anxious State of mind",
+        ten_words: "powerful songs on relatable topics, excellent scream to sing ratio",
+        created_at: new Date('April 13, 2024 09:59:17 GMT+00:00')
+    },
+    {
+        user_id: 4,
+        spotify_id: "3CbnypX7USK374jsTQbXg9",
+        slap: 4.5,
+        stick:4,
+        zest:3.5,
+        favourite_song: "Anxious State of mind",
+        ten_words: "Powerful, vibey, and most importantly, it doesn’t overstay its welcome",
+        created_at: new Date('April 13, 2024 10:21:59 GMT+00:00')
+    },
+    {
+        user_id: 5,
+        spotify_id: "3CbnypX7USK374jsTQbXg9",
+        slap: 4,
+        stick:3,
+        zest:2.5,
+        favourite_song: "Chin Up Princess",
+        ten_words: "Strong showcase for a band reborn, still finding their feet",
+        created_at: new Date('April 14, 2024 15:56:00 GMT+00:00')
+    },
+    {
+        user_id: 8,
+        spotify_id: "3CbnypX7USK374jsTQbXg9",
+        slap: 4,
+        stick:2,
+        zest:2.5,
+        favourite_song: "Chin Up Princess",
+        ten_words: "Fun but processed tunes that hit but aren't remembered later",
+        created_at: new Date('April 14, 2024 19:49:58 GMT+00:00')
+    },
+    {
+        user_id: 10,
+        spotify_id: "3CbnypX7USK374jsTQbXg9",
+        slap: 4,
+        stick:3,
+        zest:2,
+        favourite_song: "Calling Out",
+        ten_words: "Big dancey infectious tunes just missing a big climactic moment",
+        created_at: new Date('April 14, 2024 23:18:52 GMT+00:00')
+    },
+    {
+        user_id: 3,
+        spotify_id: "3CbnypX7USK374jsTQbXg9",
+        slap: 3,
+        stick:2,
+        zest:2,
+        favourite_song: "Chin Up Princess",
+        ten_words: "Always admire female-driven core, but this lacks any memorable bite",
+        created_at: new Date('April 15, 2024 10:53:49 GMT+00:00')
+    },
+    {
+        user_id: 6,
+        spotify_id: "3CbnypX7USK374jsTQbXg9",
+        slap: 3,
+        stick:2.5,
+        zest:2.5,
+        favourite_song: "Chin Up Princess",
+        ten_words: "Absolutely fine. Enjoyed having a wee bop but ultimately forgettable.",
+        created_at: new Date('April 14, 2024 17:57:03 GMT+00:00')
+    },
+    {
+        user_id: 4,
+        spotify_id: "0EjRe8ujcm3JPajilErjMj",
+        slap: 1,
+        stick:1,
+        zest:3,
+        favourite_song: "broth song",
+        ten_words: "Felt like a £5 indie night at an SU bar",
+        created_at: new Date('April 28, 2024 13:44:38 GMT+00:00')
+    },
+    {
+        user_id: 6,
+        spotify_id: "0EjRe8ujcm3JPajilErjMj",
+        slap: 3,
+        stick:2.5,
+        zest:3.5,
+        favourite_song: "broth song",
+        ten_words: "Mean Girls adjacent DIY punk enjoyably not taking itself seriously",
+        created_at: new Date('April 28, 2024 16:00:33 GMT+00:00')
+    },
+    {
+        user_id: 1,
+        spotify_id: "0EjRe8ujcm3JPajilErjMj",
+        slap: 2,
+        stick:2,
+        zest:2,
+        favourite_song: "Just Fine",
+        ten_words: "I wanted to like it, something isn't grabbing me...",
+        created_at: new Date('April 28, 2024 16:01:35 GMT+00:00')
+    },
+    {
+        user_id: 9,
+        spotify_id: "0EjRe8ujcm3JPajilErjMj",
+        slap: 1.5,
+        stick:1.5,
+        zest:1.5,
+        favourite_song: "Apathy",
+        ten_words: "is this punk now? I’m old. 19 minutes felt unadventurous.",
+        created_at: new Date('April 28, 2024 19:14:21 GMT+00:00')
+    },
+    {
+        user_id: 3,
+        spotify_id: "0EjRe8ujcm3JPajilErjMj",
+        slap: 2,
+        stick:2,
+        zest:1,
+        favourite_song: "friendship bracelet",
+        ten_words: "Brat-punk thrashes, taken verbatim from Gen Z voice note diary.",
+        created_at: new Date('April 29, 2024 11:07:52 GMT+00:00')
+    },
+    {
+        user_id: 2,
+        spotify_id: "0EjRe8ujcm3JPajilErjMj",
+        slap: 3,
+        stick:2,
+        zest:3,
+        favourite_song: "two-faced",
+        ten_words: "High school punk fun to bop to but doesn’t stick",
+        created_at: new Date('April 29, 2024 12:16:09 GMT+00:00')
+    },
+    {
+        user_id: 7,
+        spotify_id: "0EjRe8ujcm3JPajilErjMj",
+        slap: 4,
+        stick:3,
+        zest:4,
+        favourite_song: "just fine",
+        ten_words: "irreverent cheeky punk breathes life into an often samey subgenre",
+        created_at: new Date('April 29, 2024 12:19:05 GMT+00:00')
+    },
+    {
+        user_id: 5,
+        spotify_id: "0EjRe8ujcm3JPajilErjMj",
+        slap: 2,
+        stick:1,
+        zest:2,
+        favourite_song: "broth song ",
+        ten_words: "Coolest kids at the school disco I'm too old for",
+        created_at: new Date('April 29, 2024 14:54:26 GMT+00:00')
+    },
+    {
+        user_id: 9,
+        spotify_id: "6POcLLI2O3l0Khb87yhdmY",
+        slap: 5,
+        stick:5,
+        zest:4.5,
+        favourite_song: "Death makes sisters of us all",
+        ten_words: "Powerhouses. Favourite album in AGES. Floored me. Gushing praise. More.",
+        created_at: new Date('May 11, 2024 13:03:12 GMT+00:00')
+    },
+    {
+        user_id: 6,
+        spotify_id: "6POcLLI2O3l0Khb87yhdmY",
+        slap: 5,
+        stick:5,
+        zest:5,
+        favourite_song: "Trust Your Rage",
+        ten_words: "Angry, queer, sexy, feminist goblins. Technically exceptional. I cried. Perfect.",
+        created_at: new Date('May 11, 2024 14:41:54 GMT+00:00')
+    },
+    {
+        user_id: 1,
+        spotify_id: "6POcLLI2O3l0Khb87yhdmY",
+        slap: 5,
+        stick:5,
+        zest:5,
+        favourite_song: "The Worst Thing",
+        ten_words: "I'm actually mad at George for this",
+        created_at: new Date('May 11, 2024 23:23:44 GMT+00:00')
+    },
+    {
+        user_id: 1,
+        spotify_id: "6POcLLI2O3l0Khb87yhdmY",
+        slap: 5,
+        stick:5,
+        zest:5,
+        favourite_song: "The Worst Thing",
+        ten_words: "When are you super fans buying your 2000 trees tickets",
+        created_at: new Date('May 12, 2024 09:14:39 GMT+00:00')
+    },
+    {
+        user_id: 9,
+        spotify_id: "6POcLLI2O3l0Khb87yhdmY",
+        slap: 4,
+        stick:4,
+        zest:4,
+        favourite_song: "If Not Now, Then When?",
+        ten_words: "Full package - soaring melodies, huge riffs, amazing lyrics, incredible execution.",
+        created_at: new Date('May 13, 2024 10:00:41 GMT+00:00')
+    },
+    {
+        user_id: 3,
+        spotify_id: "6POcLLI2O3l0Khb87yhdmY",
+        slap: 5,
+        stick:4,
+        zest:4,
+        favourite_song: "Death Makes Sisters of Us All",
+        ten_words: "Mosh at its heart. Monstrously thrashing away our collective angst.",
+        created_at: new Date('May 13, 2024 10:56:25 GMT+00:00')
+    },
+    {
+        user_id: 5,
+        spotify_id: "6POcLLI2O3l0Khb87yhdmY",
+        slap: 4.5,
+        stick:4.5,
+        zest:4.5,
+        favourite_song: "Reckless",
+        ten_words: "Pardon, Mr Industry, why didn't we know about this before?",
+        created_at: new Date('May 13, 2024 11:00:10 GMT+00:00')
+    },
+    {
+        user_id: 2,
+        spotify_id: "6POcLLI2O3l0Khb87yhdmY",
+        slap: 4,
+        stick:4,
+        zest:5,
+        favourite_song: "The worst thing ",
+        ten_words: "Bravo George! Music that speaks right to your core.",
+        created_at: new Date('May 13, 2024 13:18:47 GMT+00:00')
+    },
+    {
+        user_id: 10,
+        spotify_id: "6POcLLI2O3l0Khb87yhdmY",
+        slap: 4,
+        stick:4,
+        zest:4,
+        favourite_song: "The worst thing ",
+        ten_words: "Gorgeous vocals, big groovy air-punching riffs, profane femininity galore",
+        created_at: new Date('May 13, 2024 14:43:11 GMT+00:00')
+    },
+    {
+        user_id: 3,
+        spotify_id: "6sV0OCuxZAhGyUC5j83X5l",
+        slap: 5,
+        stick:4,
+        zest:3,
+        favourite_song: "Marionettes",
+        ten_words: "I felt like Orpheus wading through a melodic metal underworld.",
+        created_at: new Date('May 30, 2024 13:13:14 GMT+00:00')
+    },
+    {
+        user_id: 2,
+        spotify_id: "6sV0OCuxZAhGyUC5j83X5l",
+        slap: 3,
+        stick:2,
+        zest:2,
+        favourite_song: "The Waking Sun",
+        ten_words: "deliciously grungy tunes but blend a bit into the background",
+        created_at: new Date('May 30, 2024 19:32:46 GMT+00:00')
+    },
+    {
+        user_id: 7,
+        spotify_id: "6sV0OCuxZAhGyUC5j83X5l",
+        slap: 4,
+        stick:3,
+        zest:3.5,
+        favourite_song: "illusionist ",
+        ten_words: "urgent vocals, big riffs but indistinct sludge curbs true potential",
+        created_at: new Date('May 30, 2024 19:47:09 GMT+00:00')
+    },
+    {
+        user_id: 1,
+        spotify_id: "6sV0OCuxZAhGyUC5j83X5l",
+        slap: 3,
+        stick:1,
+        zest:1,
+        favourite_song: "Screw Loose",
+        ten_words: "Heavy bottom album with riffs. But I won't be returning",
+        created_at: new Date('June 01, 2024 14:39:10 GMT+00:00')
+    },
+    {
+        user_id: 4,
+        spotify_id: "6sV0OCuxZAhGyUC5j83X5l",
+        slap: 4,
+        stick:3,
+        zest:3,
+        favourite_song: "Chains",
+        ten_words: "Excellent post-hardcore vibes and great riffs. One to watch",
+        created_at: new Date('June 01, 2024 17:58:36 GMT+00:00')
+    },
+    {
+        user_id: 5,
+        spotify_id: "6sV0OCuxZAhGyUC5j83X5l",
+        slap: 3,
+        stick:1,
+        zest:1,
+        favourite_song: "Screw Loose",
+        ten_words: "Back-heavy self-indulgent grunge with some truly incredible riffs",
+        created_at: new Date('June 02, 2024 13:56:47 GMT+00:00')
+    },
+    {
+        user_id: 5,
+        spotify_id: "6sV0OCuxZAhGyUC5j83X5l",
+        slap: 4,
+        stick:4,
+        zest:3,
+        favourite_song: "Soul Eclipse",
+        ten_words: "Waves of intrigue and aplomb bogged down by hazy production",
+        created_at: new Date('June 03, 2024 17:23:01 GMT+00:00')
+    },
+    {
+        user_id: 4,
+        spotify_id: "0GfPp0gIk1lHC5CFLFkECW",
+        slap: 5,
+        stick:5,
+        zest:5,
+        favourite_song: "Keep yourself Awake",
+        ten_words: "You’ve baited a full 5* review and I love it",
+        created_at: new Date('June 17, 2024 22:29:07 GMT+00:00')
+    },
+    {
+        user_id: 2,
+        spotify_id: "0GfPp0gIk1lHC5CFLFkECW",
+        slap: 4.5,
+        stick:4.5,
+        zest:4,
+        favourite_song: "Terminal",
+        ten_words: "Evanescence with a splash more pep and grit - chefs kiss",
+        created_at: new Date('June 17, 2024 22:35:28 GMT+00:00')
+    },
+    {
+        user_id: 7,
+        spotify_id: "0GfPp0gIk1lHC5CFLFkECW",
+        slap: 4.5,
+        stick:5,
+        zest:4,
+        favourite_song: "Terminal",
+        ten_words: "great hooks that Slap harder with every listen. Gimme more.",
+        created_at: new Date('June 17, 2024 22:53:01 GMT+00:00')
+    },
+    {
+        user_id: 6,
+        spotify_id: "0GfPp0gIk1lHC5CFLFkECW",
+        slap: 5,
+        stick:5,
+        zest:5,
+        favourite_song: "Killstar",
+        ten_words: "I’m excited for the future of this genre. Dirty magic.",
+        created_at: new Date('June 17, 2024 23:05:47 GMT+00:00')
+    },
+    {
+        user_id: 5,
+        spotify_id: "0GfPp0gIk1lHC5CFLFkECW",
+        slap: 4,
+        stick:3.5,
+        zest:3,
+        favourite_song: "The Flower",
+        ten_words: "Flashes of brilliance but the bite didn't sink too deep",
+        created_at: new Date('June 18, 2024 16:59:09 GMT+00:00')
+    },
+    {
+        user_id: 1,
+        spotify_id: "0GfPp0gIk1lHC5CFLFkECW",
+        slap: 5,
+        stick:4.5,
+        zest:4,
+        favourite_song: "Killstar",
+        ten_words: "They noodling around more that I normally like but much slap",
+        created_at: new Date('June 18, 2024 14:05:11 GMT+00:00')
+    },
+    {
+        user_id: 3,
+        spotify_id: "0GfPp0gIk1lHC5CFLFkECW",
+        slap: 3,
+        stick:4,
+        zest:3,
+        favourite_song: "Killstar",
+        ten_words: "Huge Evanescence-like mystical hooks. Needs revisiting at the mixing desk.",
+        created_at: new Date('June 19, 2024 14:42:01 GMT+00:00')
+    },
+    {
+        user_id: 9,
+        spotify_id: "0GfPp0gIk1lHC5CFLFkECW",
+        slap: 4,
+        stick:3,
+        zest:3,
+        favourite_song: "Killstar",
+        ten_words: "Boring drumming holds this back from being 5s and 4s",
+        created_at: new Date('June 19, 2024 17:59:47 GMT+00:00')
+    },
+    {
+        user_id: 2,
+        spotify_id: "4RJm4nESvtZRn9MV3sOs9V",
+        slap: 3.5,
+        stick:2.5,
+        zest:2,
+        favourite_song: "SUPER PALE HORSE",
+        ten_words: "Couple of stand out beepy boopy slappy boys. Love horse.",
+        created_at: new Date('July 18, 2024 08:14:24 GMT+00:00')
+    },
+    {
+        user_id: 4,
+        spotify_id: "4RJm4nESvtZRn9MV3sOs9V",
+        slap: 4,
+        stick:3,
+        zest:2,
+        favourite_song: "Q2",
+        ten_words: "The whole album is just a mosh pit. Love it",
+        created_at: new Date('July 18, 2024 08:14:24 GMT+00:00')
+    },
+    {
+        user_id: 1,
+        spotify_id: "4RJm4nESvtZRn9MV3sOs9V",
+        slap: 5,
+        stick:5,
+        zest:2,
+        favourite_song: "SUPER PALE HORSE",
+        ten_words: "it's an undiscerning third set of fives from Adam Willis.",
+        created_at: new Date('July 18, 2024 16:32:45 GMT+00:00')
+    },
+    {
+        user_id: 7,
+        spotify_id: "4RJm4nESvtZRn9MV3sOs9V",
+        slap: 5,
+        stick:5,
+        zest:2,
+        favourite_song: "SUPER PALE HORSE",
+        ten_words: "perfect combo of riffs and bloops to dance brains out",
+        created_at: new Date('July 18, 2024 20:19:32 GMT+00:00')
+    },
+    {
+        user_id: 7,
+        spotify_id: "4RJm4nESvtZRn9MV3sOs9V",
+        slap: 4,
+        stick:4,
+        zest:2.5,
+        favourite_song: "RUMBLE",
+        ten_words: "We can rest easy, knowing that chaos-core exists for all.",
+        created_at: new Date('July 23, 2024 13:53:49 GMT+00:00')
+    },
+    {
+        user_id: 5,
+        spotify_id: "4RJm4nESvtZRn9MV3sOs9V",
+        slap: 4.5,
+        stick:3.5,
+        zest:2.5,
+        favourite_song: "TRANQUILO!",
+        ten_words: "Completely crackers and a whole crunch of fun. Would dance.",
+        created_at: new Date('July 23, 2024 14:16:47 GMT+00:00')
+    },
+    
+
+    
     
 ]
