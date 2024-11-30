@@ -1,9 +1,22 @@
-You are now connected to database "mosh_club_test" as user "Willis".
- album_id |       spotify_id       |    album_name    |    artist_name    | user_id | slap | zest | stick | review_count | score | zest_percent | slap_percent | stick_percent | overall_percent 
-----------+------------------------+------------------+-------------------+---------+------+------+-------+--------------+-------+--------------+--------------+---------------+-----------------
-        1 | 5Am1LFOFRwS94TaVzrFQwZ | The Jaws of Life | Pierce The Veil   |       1 |  5.0 |  5.0 |   5.0 |            3 |  15.0 |           33 |           33 |            33 |              33
-        4 | 7m9ZCS7eFROU7vCrE5hIW6 | Dark Adrenaline  | Lacuna Coil       |       4 |  0.0 |  0.0 |   0.0 |            0 |   0.0 |            0 |            0 |             0 |               0
-        2 | 7jMxSZ332lLfENKNEFAd9P | Black Widow      | In this Moment    |       2 |  0.0 |  0.0 |   0.0 |            0 |   0.0 |            0 |            0 |             0 |               0
-        3 | 1U3RzGU6OczSkzD0zB9Jrp | RETAS            | Voice of Baceprot |       3 |  0.0 |  0.0 |   0.0 |            0 |   0.0 |            0 |            0 |             0 |               0
-(4 rows)
+You are now connected to database "mosh_club" as user "Willis".
+ album_id |       spotify_id       |          album_name           |    artist_name    | user_id | slap | zest | stick | review_count 
+----------+------------------------+-------------------------------+-------------------+---------+------+------+-------+--------------
+        1 | 5Am1LFOFRwS94TaVzrFQwZ | The Jaws of Life              | Pierce The Veil   |       1 | 27.5 | 23.0 |  22.0 |            8
+        2 | 7jMxSZ332lLfENKNEFAd9P | Black Widow                   | In this Moment    |       2 | 27.0 | 22.0 |  29.0 |            8
+        3 | 1U3RzGU6OczSkzD0zB9Jrp | RETAS                         | Voice of Baceprot |       3 | 29.0 | 19.0 |  22.0 |            8
+        4 | 7m9ZCS7eFROU7vCrE5hIW6 | Dark Adrenaline               | Lacuna Coil       |       4 | 21.0 | 19.0 |  30.0 |            8
+        5 | 6ehDjWGhjyKXrk0RKRMM5e | Nothing Clever, just Feelings | CLT DRP           |       5 | 28.0 | 27.0 |  27.0 |            8
+        6 | 00txDYFrU4LjWqwKE8iQJA | One More Time...              | Blink 182         |       6 | 27.0 | 24.0 |  21.0 |            8
+        7 | 3FVRmhZVaZfLvqHupMbJ6V | Witness                       | Vola              |       7 | 26.0 | 20.0 |  23.5 |            8
+        8 | 4dQj0M8CCEAN9kObuRcZZA | EverChanger                   | Invent Animate    |       8 | 25.0 | 23.0 |  32.5 |            9
+        9 | 23ytwhG1pzX6DIVWRWvW1r | Sonder                        | TesseracT         |       9 | 31.5 | 21.0 |  20.5 |           10
+       10 | 3OKcePcXMmswbp5BOKIMWH | Celestial Blues               | King Woman        |      10 | 30.5 | 36.0 |  37.0 |           10
+       11 | 3o6ih9edQcACGSYAW6eXTb | There Goes The Neighbourhood  | Kid Kapichi       |         | 32.5 | 37.5 |  31.5 |            9
+       12 | 3CbnypX7USK374jsTQbXg9 | Still Dreaming                | Dream State       |         | 35.5 | 23.0 |  27.5 |            9
+       13 | 0EjRe8ujcm3JPajilErjMj | Burnout                       | VIAL              |         | 18.5 | 20.0 |  15.0 |            8
+       14 | 6POcLLI2O3l0Khb87yhdmY | Earth, Spit, Blood and Bones  | HAWXX             |         | 41.5 | 41.0 |  40.5 |            9
+       15 | 6sV0OCuxZAhGyUC5j83X5l | The Waking Sun                | El Moono          |         | 26.0 | 16.5 |  18.0 |            7
+       16 | 0GfPp0gIk1lHC5CFLFkECW | Secrets of the Future         | Reliqa            |         | 35.0 | 31.0 |  34.5 |            8
+       17 | 4RJm4nESvtZRn9MV3sOs9V | PALEHELL                      | Paledusk          |         | 30.0 | 16.0 |  25.0 |            7
+(17 rows)
 

@@ -1,5 +1,5 @@
 const { sliceSpotifyIds, formatsHtmlQuery } = require("../db/utils/spotifyIdUtils")
-const {chatScraper} = require("../db/utils/scrapeChatUtil.js")
+const {chatScraper, postAlbumData} = require("../db/utils/scrapeChatUtil.js")
 
 describe("UTIL TESTS",()=>{
     describe("sliceSpotifyIds",()=>{
@@ -38,7 +38,7 @@ describe("UTIL TESTS",()=>{
             expect(formatsHtmlQuery(cursedWords)).toBe(cursedWordsPlus)
         })
     })
-    describe.only("Chat Scraper", ()=>{
+    describe("Chat Scraper", ()=>{
         test("Splits txt file into seperate chats", ()=>{
             // ARRANGE
             const expectedReview = `
@@ -86,6 +86,11 @@ describe("UTIL TESTS",()=>{
                 expect(data).toEqual(expect.arrayContaining(expectedObject))
             })
             
+        })
+    })
+    describe.only("postAlbumData", ()=>{
+        test("Get Object with Album ID in", ()=>{
+            expect(postAlbumData()).toBe("Nice")
         })
     })
 })

@@ -1409,6 +1409,16 @@ module.exports = [
         ten_words: "Completely crackers and a whole crunch of fun. Would dance.",
         created_at: new Date('July 23, 2024 14:16:47 GMT+00:00')
     },
+    {
+        user_id: 6,
+        spotify_id: "4RJm4nESvtZRn9MV3sOs9V",
+        slap: 4,
+        stick:3,
+        zest:2,
+        favourite_song: "I’m ready to die for my friends",
+        ten_words: "Makes me feel like I’m wandering around in an 8-bit video game",
+        created_at: new Date('september 20, 2024 09:31:18 GMT+00:00')
+    },
     
 
     

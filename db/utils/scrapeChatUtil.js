@@ -4,6 +4,7 @@
 // Then it creates creates an obect that counts te reviews.
 // Turns that object into the reviewdata
 const fs = require("fs/promises");
+const {reviewData} = require("../data/development-data/index");
 
 exports.chatScraper = ()=> {
     const titleRegex = /: [a-zA-Z0-9 ]*-*/g
@@ -25,5 +26,23 @@ exports.chatScraper = ()=> {
 }
 
 exports.postAlbumData = ()=> {
-    
+    const AlbumIdSet = new Set(reviewData.map((review)=>review.spotify_id))
+
+    const albums = [...AlbumIdSet].map((album)=>{
+        const filteredReviews = reviewData.filter((review)=>review.spotify_id === album)
+        const stickMap = filteredReviews.map((review)=> review.stick)
+        const zestMap = filteredReviews.map((review)=> review.zest)
+        const slapMap = filteredReviews.map((review)=> review.slap)
+        const albumObject= {
+            spotify_id: album,
+            slap: slapMap.reduce((a,b)=> a + b),
+            zest: zestMap.reduce((a,b)=> a + b),
+            stick: stickMap.reduce((a,b)=> a + b),
+            review_count: filteredReviews.length,
+        }
+        return albumObject
+    })
+
+    fs.writeFile("./db/data/development-data/newAlbumsData.json",JSON.stringify(albums))
+
 }
